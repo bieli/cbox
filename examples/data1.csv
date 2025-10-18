@@ -1,0 +1,6 @@
+seq,name/first,name/last,age,street,city,state,zip,dollar,pick(RED|BLUE|YELLOW|GREEN|WHITE),date
+1,Sallie,Montgomery,54,Wiok Loop,Ritpeho,AZ,33871,$4060.48,GREEN,07/18/1910
+2,Ella,Padilla,23,Himi Pike,Wajohwac,ID,91024,$120.17,RED,02/10/2014
+3,Rebecca,Wilkins,36,Tagijo Heights,Ficrugur,CA,83410,$6524.96,WHITE,10/16/1902
+4,Nettie,Farmer,63,Capva Square,Masiive,MD,11605,$7114.29,YELLOW,08/11/2023
+5,Cornelia,Rodriquez,18,Fetger Street,Baibepic,NC,02907,$8425.95,GREEN,03/26/1954

@@ -47,12 +47,15 @@ $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 
 examples: $(EXAMPLE_BINS)
 
-test: all
-	@echo "Running example binaries..."
-	@for bin in $(EXAMPLE_BINS); do \
-		if [ -x $$bin ]; then echo "Running $$bin"; $$bin || exit $$?; fi; \
-	done
-	@echo "All example runs succeeded."
+test: $(TEST_BIN_CORE) $(TEST_BIN_STRUCT) $(TEST_BIN_CONTAINER) $(TEST_BIN_INTARRAY) $(TEST_BIN_BOOL) $(TEST_DATE_BIN) $(TEST_CBOX_BIN)
+	@echo "Running all unit tests..."
+	@./$(TEST_BIN_CORE)
+	@./$(TEST_BIN_STRUCT)
+	@./$(TEST_BIN_CONTAINER)
+	@./$(TEST_BIN_INTARRAY)
+	@./$(TEST_BIN_BOOL)
+	@./$(TEST_DATE_BIN)
+	@./$(TEST_CBOX_BIN)
 
 $(BUILD_DIR)/%: $(EXAMPLES_DIR)/%.c $(LIB_DIR)/libcbox.a
 	$(CC) $(CFLAGS) $< $(LIB_DIR)/libcbox.a -o $@
@@ -64,50 +67,47 @@ test-core: $(TEST_BIN_CORE)
 	@echo "Running core unit tests..."
 	@./$(TEST_BIN_CORE)
 
-$(TEST_BIN_CORE): $(TEST_SRC_CORE) libcbox.a
-	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_CORE) libcbox.a -o $(TEST_BIN_CORE)
-
 test-struct: $(TEST_BIN_STRUCT)
 	@echo "Running struct unit tests..."
 	@./$(TEST_BIN_STRUCT)
 
-$(TEST_BIN_STRUCT): $(TEST_SRC_STRUCT) libcbox.a
-	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_STRUCT) libcbox.a -o $(TEST_BIN_STRUCT)
+$(TEST_BIN_STRUCT): $(TEST_SRC_STRUCT) $(LIB_DIR)/libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_STRUCT) $(LIB_DIR)/libcbox.a -o $(TEST_BIN_STRUCT)
 
 test-cbox: $(TEST_CBOX_BIN)
 	@echo "Running cbox unit tests..."
 	@./$(TEST_CBOX_BIN)
 
-$(TEST_CBOX_BIN): $(TEST_CBOX_SRC) libcbox.a
-	$(CC) $(CFLAGS) -Iinclude $(TEST_CBOX_SRC) libcbox.a -o $(TEST_CBOX_BIN)
+$(TEST_CBOX_BIN): $(TEST_CBOX_SRC) $(LIB_DIR)/libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_CBOX_SRC) $(LIB_DIR)/libcbox.a -o $(TEST_CBOX_BIN)
 
 test-bool: $(TEST_BOOL_BIN)
 	@echo "Running cbox_bool unit tests..."
 	@./$(TEST_BOOL_BIN)
 
-$(TEST_BOOL_BIN): $(TEST_BOOL_SRC) libcbox.a
-	$(CC) $(CFLAGS) -Iinclude $(TEST_BOOL_SRC) libcbox.a -o $(TEST_BOOL_BIN)
+$(TEST_BOOL_BIN): $(TEST_BOOL_SRC) $(LIB_DIR)/libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_BOOL_SRC) $(LIB_DIR)/libcbox.a -o $(TEST_BOOL_BIN)
 
 test-bool: $(TEST_DATE_BIN)
 	@echo "Running cbox_date unit tests..."
 	@./$(TEST_DATE_BIN)
 
-$(TEST_DATE_BIN): $(TEST_DATE_SRC) libcbox.a
-	$(CC) $(CFLAGS) -Iinclude $(TEST_DATE_SRC) libcbox.a -o $(TEST_DATE_BIN)
+$(TEST_DATE_BIN): $(TEST_DATE_SRC) $(LIB_DIR)/libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_DATE_SRC) $(LIB_DIR)/libcbox.a -o $(TEST_DATE_BIN)
 
 test-intarray: $(TEST_BIN_INTARRAY)
 	@echo "Running intarray unit tests..."
 	@./$(TEST_BIN_INTARRAY)
 
-$(TEST_BIN_INTARRAY): $(TEST_SRC_INTARRAY) libcbox.a
-	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_INTARRAY) libcbox.a -o $(TEST_BIN_INTARRAY)
+$(TEST_BIN_INTARRAY): $(TEST_SRC_INTARRAY) $(LIB_DIR)/libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_INTARRAY) $(LIB_DIR)/libcbox.a -o $(TEST_BIN_INTARRAY)
 
 test-container: $(TEST_BIN_CONTAINER)
 	@echo "Running container unit tests..."
 	@./$(TEST_BIN_CONTAINER)
 
-$(TEST_BIN_CONTAINER): $(TEST_SRC_CONTAINER) libcbox.a
-	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_CONTAINER) libcbox.a -o $(TEST_BIN_CONTAINER)
+$(TEST_BIN_CONTAINER): $(TEST_SRC_CONTAINER) $(LIB_DIR)/libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_CONTAINER) $(LIB_DIR)/libcbox.a -o $(TEST_BIN_CONTAINER)
 
 test:
 	@echo "Running all unit tests..."
@@ -128,5 +128,6 @@ clean:
 	rm -rf $(BUILD_DIR) $(LIB_DIR)
 
 
-.PHONY: all examples clean
+.PHONY: all examples clean test test-core test-struct test-cbox test-bool test-intarray test-container
+
 

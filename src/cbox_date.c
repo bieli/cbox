@@ -8,7 +8,13 @@ CBoxDate* cbox_date_parse(const char* token) {
     CBoxDate* date = malloc(sizeof(CBoxDate));
     if (!date) return NULL;
 
+    // Try YYYY-MM-DD
     if (sscanf(token, "%4d-%2d-%2d", &date->year, &date->month, &date->day) == 3) {
+        return date;
+    }
+
+    // Try DD/MM/YYYY
+    if (sscanf(token, "%2d/%2d/%4d", &date->month, &date->day, &date->year) == 3) {
         return date;
     }
 

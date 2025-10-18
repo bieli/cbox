@@ -19,5 +19,6 @@ extern CBoxTrait CBOX_CSV_TRAIT;
 CBoxCSV* read_csv(const char* path, char separator, bool skip_header, size_t max_rows);
 void csv_print(const void* data);
 void csv_print_with_headers(const void* data);
+CBox* cbox_currency_parse(const char* token);
 
 #endif
