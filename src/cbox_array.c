@@ -4,24 +4,24 @@
 #include <string.h>
 
 void* intarray_clone(const void* data) {
-    const IntArray* arr = (const IntArray*)data;
+    const IntArray* original = (const IntArray*)data;
     IntArray* copy = malloc(sizeof(IntArray));
     if (!copy) return NULL;
 
-    copy->length = arr->length;
-    copy->values = malloc(sizeof(int) * arr->length);
+    copy->length = original->length;
+    copy->values = malloc(sizeof(int) * copy->length);
     if (!copy->values) {
         free(copy);
         return NULL;
     }
 
-    memcpy(copy->values, arr->values, sizeof(int) * arr->length);
+    memcpy(copy->values, original->values, sizeof(int) * copy->length);
     return copy;
 }
 
 void intarray_destroy(void* data) {
     IntArray* arr = (IntArray*)data;
-    free(arr->values);
+    if (arr->values) free(arr->values);
     free(arr);
 }
 

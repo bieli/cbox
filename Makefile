@@ -8,6 +8,9 @@ TEST_CBOX_SRC   = tests/test_cbox.c
 TEST_CBOX_BIN   = build/test_cbox
 TEST_SRC_STRUCT = tests/test_cbox_struct.c
 TEST_BIN_STRUCT = build/test_cbox_struct
+TEST_SRC_INTARRAY = tests/test_cbox_intarray.c
+TEST_BIN_INTARRAY = build/test_cbox_intarray
+
 
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -I$(INCLUDE_DIR) -g
@@ -63,6 +66,13 @@ test-cbox: $(TEST_CBOX_BIN)
 $(TEST_CBOX_BIN): $(TEST_CBOX_SRC) libcbox.a
 	$(CC) $(CFLAGS) -Iinclude $(TEST_CBOX_SRC) libcbox.a -o $(TEST_CBOX_BIN)
 
+test-intarray: $(TEST_BIN_INTARRAY)
+	@echo "Running intarray unit tests..."
+	@./$(TEST_BIN_INTARRAY)
+
+$(TEST_BIN_INTARRAY): $(TEST_SRC_INTARRAY) libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_INTARRAY) libcbox.a -o $(TEST_BIN_INTARRAY)
+
 test:
 	@echo "Running all unit tests..."
 	@echo "\n"
@@ -71,6 +81,8 @@ test:
 	@make test-core
 	@echo "\n"
 	@make test-struct
+	@echo "\n"
+	@make test-intarray
 
 clean:
 	rm -rf $(BUILD_DIR) libcbox.a
