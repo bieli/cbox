@@ -1,5 +1,9 @@
 # CBox - Generic Type Boxing for ANSI C
 
+![CI status](https://github.com/bieli/cbox/actions/workflows/ci.yml/badge.svg)
+![github_tag](https://img.shields.io/github/v/tag/bieli/cbox)
+
+
 `CBox` is a lightweight, extensible system for boxing arbitrary data types in ANSI C. 
 It provides runtime type tagging, trait-based polymorphism, and optional JSON serialization — all without relying on C++ features or external libraries.
 
