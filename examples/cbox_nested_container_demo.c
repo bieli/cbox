@@ -41,7 +41,14 @@ int main() {
     cbox_print(boxed_outer);
 
     // Serialize to JSON (basic summary)
-    char json[256];
+    // size_t buffer_size = 4096;
+    // char* json = malloc(buffer_size);
+    // if (json) {
+    //     cbox_to_json(boxed_outer, json, buffer_size);
+    //     printf("== JSON summary: %s\n", json);
+    //     free(json);
+    // }
+    char json[CBOX_CONTAINER_JSON_MAX_LEN];
     cbox_to_json(boxed_outer, json, sizeof(json));
     printf("== JSON summary: %s\n", json);
 

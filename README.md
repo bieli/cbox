@@ -208,11 +208,12 @@ JSON: {"type":"int","value":42,"address":"0x5643e92982d0"}
 
 ```bash
 $ make
-$ ./build/cbox_container_demo 
+$ ./build/cbox_container_demo
 CBoxContainer[3]:
   [0] CBox<decimal>: 1.99
   [1] IntArray[2]: 10 20 
-  [2] IntArray[4]: 101 102 103 104
+  [2] IntArray[4]: 101 102 103 104 
+== JSON summary: {"type":"CBoxContainer","count":3,"items":[{"type":"Decimal","value":"1.99"},{"type":"IntArray","length":2,"values":[10,20],"address":"0x558df07653a0"},{"type":"IntArray","length":4,"values":[101,102,103,104],"address":"0x558df0765430"}]}
 ```
 
 ### [examples/cbox_task_queue.c](examples/cbox_task_queue.c)
@@ -292,7 +293,7 @@ SensorReading{id: sensor-A1, value: 78.90, time: 169765}
 
 ```bash
 $ make
-$ ./build/cbox_nested_container_demo
+$ ./build/cbox_nested_container_demo 
 == Nested container structure:
 CBoxContainer[2]:
   [0] CBoxContainer[2]:
@@ -301,7 +302,7 @@ CBoxContainer[2]:
   [1] CBoxContainer[2]:
   [0] IntArray[3]: 100 200 300 
   [1] CBox<decimal>: 3.33
-== JSON summary: {"type":"CBoxContainer","count":2}
+== JSON summary: {"type":"CBoxContainer","count":2,"items":[{"type":"CBoxContainer","count":2,"items":[{"type":"Decimal","value":"1.11"},{"type":"Decimal","value":"2.22"}]},{"type":"CBoxContainer","count":2,"items":[{"type":"IntArray","length":3,"values":[100,200,300],"address":"0x55a16f98d480"},{"type":"Decimal","value":"3.33"}]}]}
 ```
 
 ## Unit tests run

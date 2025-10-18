@@ -54,7 +54,27 @@ void container_print(const void* data) {
 
 void container_serialize_json(const void* data, char* out, size_t size) {
     const CBoxContainer* container = (const CBoxContainer*)data;
-    snprintf(out, size, "{\"type\":\"CBoxContainer\",\"count\":%zu}", container->count);
+    char* cursor = out;
+    size_t remaining = size;
+
+    int written = snprintf(cursor, remaining, "{\"type\":\"CBoxContainer\",\"count\":%zu,\"items\":[", container->count);
+    cursor += written;
+    remaining -= written;
+
+    for (size_t i = 0; i < container->count; ++i) {
+        char item_json[CBOX_CONTAINER_JSON_MAX_LEN];
+        if (container->items[i] && container->items[i]->trait && container->items[i]->trait->serialize_json) {
+            container->items[i]->trait->serialize_json(container->items[i]->data, item_json, sizeof(item_json));
+        } else {
+            snprintf(item_json, sizeof(item_json), "\"<unknown>\"");
+        }
+
+        written = snprintf(cursor, remaining, "%s%s", i > 0 ? "," : "", item_json);
+        cursor += written;
+        remaining -= written;
+    }
+
+    snprintf(cursor, remaining, "]}");
 }
 
 CBoxTrait CBOX_CONTAINER_TRAIT = {

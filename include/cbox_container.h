@@ -3,6 +3,8 @@
 
 #include "cbox.h"
 
+#define CBOX_CONTAINER_JSON_MAX_LEN 4096
+
 typedef struct {
     size_t count;
     size_t capacity;

@@ -20,7 +20,13 @@ int main() {
     cbox_container_add(container, boxed_arr1);
 
     CBox* box = CBOX_WRAP_CONTAINER(container);
+
     cbox_print(box);
+
+    char json[CBOX_CONTAINER_JSON_MAX_LEN];
+    cbox_to_json(box, json, sizeof(json));
+    printf("== JSON summary: %s\n", json);
+
     cbox_free(box);
     return 0;
 }

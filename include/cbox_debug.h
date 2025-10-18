@@ -2,6 +2,7 @@
 #define CBOX_DEBUG_H
 
 #include "cbox.h"
+#include "cbox_container.h"
 #include <stdio.h>
 
 static inline const char* cbox_type_name(CBoxType type) {
@@ -35,7 +36,7 @@ static inline const char* cbox_type_name(CBoxType type) {
     do { \
         CBOX_DEBUG_INFO(box); \
         if ((box) && (box)->trait && (box)->trait->serialize_json) { \
-            char __json_buf[512]; \
+            char __json_buf[CBOX_CONTAINER_JSON_MAX_LEN]; \
             (box)->trait->serialize_json((box)->data, __json_buf, sizeof(__json_buf)); \
             printf("[CBox JSON] %s\n", __json_buf); \
         } else { \
@@ -54,7 +55,7 @@ static inline const char* cbox_type_name(CBoxType type) {
 
 #define CBOX_DEBUG_JSON(box) \
     do { \
-        char __json_buf[512]; \
+        char __json_buf[CBOX_CONTAINER_JSON_MAX_LEN]; \
         if ((box) && (box)->trait && (box)->trait->serialize_json) { \
             (box)->trait->serialize_json((box)->data, __json_buf, sizeof(__json_buf)); \
             printf("[CBox JSON] %s\n", __json_buf); \
