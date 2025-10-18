@@ -240,15 +240,19 @@ Product{name: Laptop, price: 1499.99, quantity: 3}
 ```bash
 $ make
 $ ./build/cbox_array_demo 
-[CBox] type: 4 (array), size: 16, data: 0x55a139af4310
+[CBox] type: 5 (array), size: 16, data: 0x56003bdad310
 [CBox Value] IntArray[3]: 1 2 3 
 IntArray[3]: 1 2 3 
-[CBox JSON] {"type":"IntArray","length":3,"values":[1,2,3],"address":"0x55a139af4310"}
-[CBox] type: 4 (array), size: 16, data: 0x55a139af4770
-[CBox] cloned from: 0x55a139af42e0
+[CBox JSON] {"type":"IntArray","length":3,"values":[1,2,3],"address":"0x56003bdad310"}
+[CBox] type: 5 (array), size: 16, data: 0x56003bdad770
+[CBox] cloned from: 0x56003bdad2e0
 [CBox Value] IntArray[3]: 1 2 3 
 IntArray[3]: 1 2 3 
-[CBox JSON] {"type":"IntArray","length":3,"values":[1,2,3],"address":"0x55a139af4770"}
+[CBox JSON] {"type":"IntArray","length":3,"values":[1,2,3],"address":"0x56003bdad770"}
+[CBox] type: 5 (array), size: 16, data: 0x56003bdad820
+[CBox Value] IntArray[4]: 41 42 43 44 
+IntArray[4]: 41 42 43 44 
+[CBox JSON] {"type":"IntArray","length":4,"values":[41,42,43,44],"address":"0x56003bdad820"}
 ```
 
 ### [examples/cbox_registry_pipeline.c](examples/cbox_registry_pipeline.c)
