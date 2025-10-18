@@ -228,6 +228,23 @@ CBoxContainer[3]:
 == JSON summary: {"type":"CBoxContainer","count":3,"items":[{"type":"Decimal","value":"1.99"},{"type":"IntArray","length":2,"values":[10,20],"address":"0x558df07653a0"},{"type":"IntArray","length":4,"values":[101,102,103,104],"address":"0x558df0765430"}]}
 ```
 
+### [examples/cbox_currency_demo.c](examples/cbox_currency_demo.c)
+
+```bash
+$ make
+$ ./build/cbox_currency_demo
+Printing currency object:
+CBox<currency>: CBox<decimal>: 8425.95
+ CBox<string>: "EUR"
+JSON output:
+{"type":"currency","amount":{"type":"Decimal","value":"8425.95"},"code":{"type":"string","value":"EUR"}}
+
+CBox<currency>: CBox<decimal>: 10.12
+ CBox<string>: "USD"
+JSON output:
+{"type":"currency","amount":{"type":"Decimal","value":"10.12"},"code":{"type":"string","value":"USD"}}
+```
+
 ### [examples/cbox_task_queue.c](examples/cbox_task_queue.c)
 
 ```bash
@@ -356,22 +373,85 @@ JSON:
 {"type":"CBoxCSV","rows":[[{"type":"string","value":"Alice"},{"type":"int","value":30,"address":"0x559c1dc229d0"},{"type":"double","value":1.650000,"address":"0x559c1dc22a40"},{"type":"bool","value":true},{"type":"date","value":"2021-06-15"}],[{"type":"string","value":"Bob"},{"type":"int","value":25,"address":"0x559c1dc22c50"},{"type":"double","value":1.800000,"address":"0x559c1dc22cc0"},{"type":"bool","value":false},{"type":"date","value":"2022-01-10"}],[{"type":"string","value":"Charlie"},{"type":"int","value":40,"address":"0x559c1dc22ed0"},{"type":"double","value":1.750000,"address":"0x559c1dc22f40"},{"type":"bool","value":true},{"type":"date","value":"2020-09-05"}],[{"type":"string","value":"Diana"},{"type":"int","value":35,"address":"0x559c1dc23150"},{"type":"double","value":1.600000,"address":"0x559c1dc231c0"},{"type":"bool","value":false},{"type":"date","value":"2023-03-22"}]]}
 ```
 
-
-### [examples/cbox_currency_demo.c](examples/cbox_currency_demo.c)
+### [examples/cbox_csv_demo1.c](examples/cbox_csv_demo1.c)
 
 ```bash
 $ make
-$ ./build/cbox_currency_demo
-Printing currency object:
-CBox<currency>: CBox<decimal>: 8425.95
- CBox<string>: "EUR"
-JSON output:
-{"type":"currency","amount":{"type":"Decimal","value":"8425.95"},"code":{"type":"string","value":"EUR"}}
-
-CBox<currency>: CBox<decimal>: 10.12
+$ ./build/cbox_csv_demo1
+CBoxCSV: 5 rows x 11 columns
+Columns: seq, name/first, name/last, age, street, city, state, zip, dollar, pick(RED|BLUE|YELLOW|GREEN|WHITE), date
+Row 0: 
+ Col 0: CBox<int>: 1
+ Col 1: CBox<string>: "Sallie"
+ Col 2: CBox<string>: "Montgomery"
+ Col 3: CBox<int>: 54
+ Col 4: CBox<string>: "Wiok Loop"
+ Col 5: CBox<string>: "Ritpeho"
+ Col 6: CBox<string>: "AZ"
+ Col 7: CBox<int>: 33871
+ Col 8: CBox<currency>: CBox<decimal>: 4060.48
  CBox<string>: "USD"
-JSON output:
-{"type":"currency","amount":{"type":"Decimal","value":"10.12"},"code":{"type":"string","value":"USD"}}
+ Col 9: CBox<string>: "GREEN"
+ Col 10: CBox<date>: 1910-07-18
+
+Row 1: 
+ Col 0: CBox<int>: 2
+ Col 1: CBox<string>: "Ella"
+ Col 2: CBox<string>: "Padilla"
+ Col 3: CBox<int>: 23
+ Col 4: CBox<string>: "Himi Pike"
+ Col 5: CBox<string>: "Wajohwac"
+ Col 6: CBox<string>: "ID"
+ Col 7: CBox<int>: 91024
+ Col 8: CBox<currency>: CBox<decimal>: 120.17
+ CBox<string>: "USD"
+ Col 9: CBox<string>: "RED"
+ Col 10: CBox<date>: 2014-02-10
+
+Row 2: 
+ Col 0: CBox<int>: 3
+ Col 1: CBox<string>: "Rebecca"
+ Col 2: CBox<string>: "Wilkins"
+ Col 3: CBox<int>: 36
+ Col 4: CBox<string>: "Tagijo Heights"
+ Col 5: CBox<string>: "Ficrugur"
+ Col 6: CBox<string>: "CA"
+ Col 7: CBox<int>: 83410
+ Col 8: CBox<currency>: CBox<decimal>: 6524.96
+ CBox<string>: "USD"
+ Col 9: CBox<string>: "WHITE"
+ Col 10: CBox<date>: 1902-10-16
+
+Row 3: 
+ Col 0: CBox<int>: 4
+ Col 1: CBox<string>: "Nettie"
+ Col 2: CBox<string>: "Farmer"
+ Col 3: CBox<int>: 63
+ Col 4: CBox<string>: "Capva Square"
+ Col 5: CBox<string>: "Masiive"
+ Col 6: CBox<string>: "MD"
+ Col 7: CBox<int>: 11605
+ Col 8: CBox<currency>: CBox<decimal>: 7114.29
+ CBox<string>: "USD"
+ Col 9: CBox<string>: "YELLOW"
+ Col 10: CBox<date>: 2023-08-11
+
+Row 4: 
+ Col 0: CBox<int>: 5
+ Col 1: CBox<string>: "Cornelia"
+ Col 2: CBox<string>: "Rodriquez"
+ Col 3: CBox<int>: 18
+ Col 4: CBox<string>: "Fetger Street"
+ Col 5: CBox<string>: "Baibepic"
+ Col 6: CBox<string>: "NC"
+ Col 7: CBox<int>: 2907
+ Col 8: CBox<currency>: CBox<decimal>: 8425.95
+ CBox<string>: "USD"
+ Col 9: CBox<string>: "GREEN"
+ Col 10: CBox<date>: 1954-03-26
+
+JSON:
+{"type":"CBoxCSV","rows":[[{"type":"int","value":1,"address":"0x55e93e913be0"},{"type":"string","value":"Sallie"},{"type":"string","value":"Montgomery"},{"type":"int","value":54,"address":"0x55e93e913d30"},{"type":"string","value":"Wiok Loop"},{"type":"string","value":"Ritpeho"},{"type":"string","value":"AZ"},{"type":"int","value":33871,"address":"0x55e93e913ef0"},{"type":"currency","amount":{"type":"Decimal","value":"4060.48"},"code":{"type":"string","value":"USD"}},{"type":"string","value":"GREEN"},{"type":"date","value":"1910-07-18"}],[{"type":"int","value":2,"address":"0x55e93e914250"},{"type":"string","value":"Ella"},{"type":"string","value":"Padilla"},{"type":"int","value":23,"address":"0x55e93e9143a0"},{"type":"string","value":"Himi Pike"},{"type":"string","value":"Wajohwac"},{"type":"string","value":"ID"},{"type":"int","value":91024,"address":"0x55e93e914560"},{"type":"currency","amount":{"type":"Decimal","value":"120.17"},"code":{"type":"string","value":"USD"}},{"type":"string","value":"RED"},{"type":"date","value":"2014-02-10"}],[{"type":"int","value":3,"address":"0x55e93e9148c0"},{"type":"string","value":"Rebecca"},{"type":"string","value":"Wilkins"},{"type":"int","value":36,"address":"0x55e93e914a10"},{"type":"string","value":"Tagijo Heights"},{"type":"string","value":"Ficrugur"},{"type":"string","value":"CA"},{"type":"int","value":83410,"address":"0x55e93e914bd0"},{"type":"currency","amount":{"type":"Decimal","value":"6524.96"},"code":{"type":"string","value":"USD"}},{"type":"string","value":"WHITE"},{"type":"date","value":"1902-10-16"}],[{"type":"int","value":4,"address":"0x55e93e914f30"},{"type":"string","value":"Nettie"},{"type":"string","value":"Farmer"},{"type":"int","value":63,"address":"0x55e93e915080"},{"type":"string","value":"Capva Square"},{"type":"string","value":"Masiive"},{"type":"string","value":"MD"},{"type":"int","value":11605,"address":"0x55e93e915240"},{"type":"currency","amount":{"type":"Decimal","value":"7114.29"},"code":{"type":"string","value":"USD"}},{"type":"string","value":"YELLOW"},{"type":"date","value":"2023-08-11"}],[{"type":"int","value":5,"address":"0x55e93e9155a0"},{"type":"string","value":"Cornelia"},{"type":"string","value":"Rodriquez"},{"type":"int","value":18,"address":"0x55e93e9156f0"},{"type":"string","value":"Fetger Street"},{"type":"string","value":"Baibepic"},{"type":"string","value":"NC"},{"type":"int","value":2907,"address":"0x55e93e9158b0"},{"type":"currency","amount":{"type":"Decimal","value":"8425.95"},"code":{"type":"string","value":"USD"}},{"type":"string","value":"GREEN"},{"type":"date","value":"1954-03-26"}]]}
 ```
 
 ## Unit tests run
