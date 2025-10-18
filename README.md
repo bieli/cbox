@@ -148,28 +148,28 @@ You can define your own types and traits by implementing the four trait function
 $ make
 $ ./build/cbox_demo
 == INT BOX ==
-[CBox] type: 0 (int), size: 4, data: 0x55ca186812d0
+[CBox] type: 0 (int), size: 4, data: 0x564814bbb2d0
 [CBox Value] CBox<int>: 42
 CBox<int>: 42
-[CBox JSON] {"type":"int","value":42,"address":"0x55ca186812d0"}
+[CBox JSON] {"type":"int","value":42,"address":"0x564814bbb2d0"}
 == INT CLONE ==
-[CBox] type: 0 (int), size: 4, data: 0x55ca18681730
-[CBox] cloned from: 0x55ca186812a0
+[CBox] type: 0 (int), size: 4, data: 0x564814bbb730
+[CBox] cloned from: 0x564814bbb2a0
 [CBox Value] CBox<int>: 42
 CBox<int>: 42
-[CBox JSON] {"type":"int","value":42,"address":"0x55ca18681730"}
+[CBox JSON] {"type":"int","value":42,"address":"0x564814bbb730"}
 == FLOAT BOX ==
-[CBox] type: 1 (float), size: 4, data: 0x55ca18681780
+[CBox] type: 1 (float), size: 4, data: 0x564814bbb780
 [CBox Value] CBox<float>: 3.140000
 CBox<float>: 3.140000
-[CBox JSON] {"type":"float","value":3.140000,"address":"0x55ca18681780"}
+[CBox JSON] {"type":"float","value":3.140000,"address":"0x564814bbb780"}
 == PERSON BOX ==
-[CBox] type: 3 (struct), size: 36, data: 0x55ca186817d0
+[CBox] type: 4 (struct), size: 36, data: 0x564814bbb7d0
 [CBox Value] Person{name: Alice, age: 30}
 Person{name: Alice, age: 30}
-[CBox JSON] {"type":"Person","name":"Alice","age":30,"address":"0x55ca186817d0"}
+[CBox JSON] {"type":"Person","name":"Alice","age":30,"address":"0x564814bbb7d0"}
 == DECIMAL BOX ==
-[CBox] type: 3 (decimal), size: 8, data: 0x55e52b199830
+[CBox] type: 3 (decimal), size: 8, data: 0x564814bbb830
 [CBox Value] CBox<decimal>: 12.34
 CBox<decimal>: 12.34
 [CBox JSON] {"type":"Decimal","value":"12.34"}
