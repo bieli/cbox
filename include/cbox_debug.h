@@ -4,9 +4,21 @@
 #include "cbox.h"
 #include <stdio.h>
 
+static inline const char* cbox_type_name(CBoxType type) {
+    switch (type) {
+        case CBOX_INT:    return "int";
+        case CBOX_FLOAT:  return "float";
+        case CBOX_DOUBLE: return "double";
+        case CBOX_STRUCT: return "struct";
+        case CBOX_ARRAY:  return "array";
+        default:          return "unknown";
+    }
+}
+
 #define CBOX_DEBUG_INFO(box) \
     do { \
-        printf("[CBox] type: %d, size: %zu, data: %p\n", (box)->type, (box)->size, (box)->data); \
+        printf("[CBox] type: %d (%s), size: %zu, data: %p\n", \
+            (box)->type, cbox_type_name((box)->type), (box)->size, (box)->data); \
         if ((box)->parent) \
             printf("[CBox] cloned from: %p\n", (box)->parent); \
         if ((box) && (box)->trait && (box)->trait->print) { \
@@ -26,9 +38,10 @@
             (box)->trait->serialize_json((box)->data, __json_buf, sizeof(__json_buf)); \
             printf("[CBox JSON] %s\n", __json_buf); \
         } else { \
-            printf("[CBox JSON] (no serialize_json function available)\n"); \
+            printf("[WARN] [CBox JSON] Function 'serialize_json' not exists!\n"); \
         } \
     } while (0)
+
 
 #define CBOX_DEBUG_PRINT(box) \
     do { \

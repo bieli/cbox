@@ -1,7 +1,26 @@
-# CBox — Generic Type Boxing for ANSI C
+# CBox - Generic Type Boxing for ANSI C
 
 `CBox` is a lightweight, extensible system for boxing arbitrary data types in ANSI C. 
 It provides runtime type tagging, trait-based polymorphism, and optional JSON serialization — all without relying on C++ features or external libraries.
+
+```c                                            
+        CCCCCCCCCCCCCBBBBBBBBBBBBBBBBB        OOOOOOOOO     XXXXXXX       XXXXXXX
+     CCC::::::::::::CB::::::::::::::::B     OO:::::::::OO   X:::::X       X:::::X
+   CC:::::::::::::::CB:::::::::::::::::B  OO:::::::::::::OO X:::::X       X:::::X
+  C:::::CCCCCCCC::::CBB:::::BBBBBB::::::BO:::::::OOO:::::::OX::::::X     X::::::X
+ C:::::C       CCCCCC  B::::B     B:::::BO::::::O   O::::::OXXX:::::X   X:::::XXX
+C:::::C                B::::B     B:::::BO:::::O     O:::::O   X:::::X X:::::X   
+C:::::C                B::::B     B:::::BO:::::O     O:::::O    X:::::X:::::X    
+C:::::C                B::::BBBBBB:::::B O:::::O     O:::::O     X:::::::::X     
+C:::::C                B:::::::::::::BB  O:::::O     O:::::O     X:::::::::X     
+C:::::C                B::::BBBBBB:::::B O:::::O     O:::::O    X:::::X:::::X    
+C:::::C                B::::B     B:::::BO:::::O     O:::::O   X:::::X X:::::X   
+ C:::::C       CCCCCC  B::::B     B:::::BO::::::O   O::::::OXXX:::::X   X:::::XXX
+  C:::::CCCCCCCC::::CBB:::::B     B:::::BO:::::::OOO:::::::OX::::::X     X::::::X
+   CC:::::::::::::::CB::::::BBBBBB:::::B  OO:::::::::::::OO X:::::X       X:::::X
+     CCC::::::::::::CB::::::::::::::::B     OO:::::::::OO   X:::::X       X:::::X
+        CCCCCCCCCCCCCBBBBBBBBBBBBBBBBB        OOOOOOOOO     XXXXXXX       XXXXXXX
+```
 
 ## Motivation
 
@@ -108,6 +127,7 @@ int       | CBOX_INT_TRAIT      | Yes
 float     | CBOX_FLOAT_TRAIT    | Yes
 double    | CBOX_DOUBLE_TRAIT   | Yes
 Person    | CBOX_PERSON_TRAIT   | Yes
+Product   | CBOX_PRODUCT_TRAIT  | Yes
 IntArray  | CBOX_INTARRAY_TRAIT | Yes
 ```
 
@@ -116,55 +136,54 @@ You can define your own types and traits by implementing the four trait function
 
 ## Examples
 
-### examples/cbox_demo.c
+### [examples/cbox_demo.c](examples/cbox_demo.c)
 
 ```bash
 $ make
 $ ./build/cbox_demo
 == INT BOX ==
-[CBox] type: 0, size: 4, data: 0x55ca186812d0
+[CBox] type: 0 (int), size: 4, data: 0x55ca186812d0
 [CBox Value] CBox<int>: 42
 CBox<int>: 42
 [CBox JSON] {"type":"int","value":42,"address":"0x55ca186812d0"}
 == INT CLONE ==
-[CBox] type: 0, size: 4, data: 0x55ca18681730
+[CBox] type: 0 (int), size: 4, data: 0x55ca18681730
 [CBox] cloned from: 0x55ca186812a0
 [CBox Value] CBox<int>: 42
 CBox<int>: 42
 [CBox JSON] {"type":"int","value":42,"address":"0x55ca18681730"}
 == FLOAT BOX ==
-[CBox] type: 1, size: 4, data: 0x55ca18681780
+[CBox] type: 1 (float), size: 4, data: 0x55ca18681780
 [CBox Value] CBox<float>: 3.140000
 CBox<float>: 3.140000
 [CBox JSON] {"type":"float","value":3.140000,"address":"0x55ca18681780"}
 == PERSON BOX ==
-[CBox] type: 3, size: 36, data: 0x55ca186817d0
+[CBox] type: 3 (struct), size: 36, data: 0x55ca186817d0
 [CBox Value] Person{name: Alice, age: 30}
 Person{name: Alice, age: 30}
 [CBox JSON] {"type":"Person","name":"Alice","age":30,"address":"0x55ca186817d0"}
 ```
 
-
-### examples/cbox_debug.c
+### [examples/cbox_debug.c](examples/cbox_debug.c)
 
 ```bash
 $ make
 $ ./build/cbox_debug 
-[CBox] type: 0, size: 4, data: 0x5575ab1862d0
+[CBox] type: 0 (int), size: 4, data: 0x5575ab1862d0
 [CBox Value] CBox<int>: 42
 CBox<int>: 42
 [CBox JSON] {"type":"int","value":42,"address":"0x5575ab1862d0"}
-[CBox] type: 3, size: 36, data: 0x5575ab186730
+[CBox] type: 3 (struct), size: 36, data: 0x5575ab186730
 [CBox Value] Person{name: Alice, age: 30}
 Person{name: Alice, age: 30}
 [CBox JSON] {"type":"Person","name":"Alice","age":30,"address":"0x5575ab186730"}
-[CBox] type: 3, size: 16, data: 0x5575ab1867b0
+[CBox] type: 3 (struct), size: 16, data: 0x5575ab1867b0
 [CBox Value] IntArray[3]: 1 2 3 
 IntArray[3]: 1 2 3 
 [CBox JSON] {"type":"IntArray","length":3,"values":[1,2,3],"address":"0x5575ab1867b0"}
 ```
 
-### examples/cbox_registry.c
+### [examples/cbox_registry.c](examples/cbox_registry.c)
 
 ```bash
 $ make
@@ -172,26 +191,57 @@ $ ./build/cbox_registry
 JSON: {"type":"int","value":42,"address":"0x5643e92982d0"}
 ```
 
-### examples/cbox_task_queue.c
+### [examples/cbox_task_queue.c](examples/cbox_task_queue.c)
 
 ```bash
 $ make
 $ ./build/cbox_task_queue 
 Processing item 0:
-[CBox] type: 3, size: 17, data: 0x55efab2b4340
+[CBox] type: 3 (struct), size: 17, data: 0x55efab2b4340
 [CBox Value] Message: Hello from CBox!
 Message: Hello from CBox!
 [WARN] [CBox JSON] Function 'serialize_json' not exists!
 Processing item 1:
-[CBox] type: 0, size: 4, data: 0x55efab2b4390
+[CBox] type: 0 (int), size: 4, data: 0x55efab2b4390
 [CBox Value] CBox<int>: 101
 CBox<int>: 101
 [CBox JSON] {"type":"int","value":101,"address":"0x55efab2b4390"}
 Processing item 2:
-[CBox] type: 3, size: 68, data: 0x55efab2b43e0
+[CBox] type: 3 (struct), size: 68, data: 0x55efab2b43e0
 [CBox Value] Task[label: Download file, priority: 2]
 Task[label: Download file, priority: 2]
 [CBox JSON] {"type":"Task","label":"Download file","priority":2,"address":"0x55efab2b43e0"}
+```
+
+### [examples/cbox_product_demo.c](examples/cbox_product_demo.c)
+
+```bash
+$ make
+$ ./build/cbox_product_demo 
+[CBox] type: 3 (struct), size: 80, data: 0x55e9a6c7a2d0
+[CBox Value] Product{name: Laptop, price: 1499.99, quantity: 3}
+Product{name: Laptop, price: 1499.99, quantity: 3}
+[CBox JSON] {"type":"Product","name":"Laptop","price":1499.99,"quantity":3,"address":"0x55e9a6c7a2d0"}
+```
+
+### [examples/cbox_registry_pipeline.c](examples/cbox_registry_pipeline.c)
+
+```bash
+$ make
+$ ./build/cbox_registry_pipeline 
+== Pipeline Output ==
+[CBox] type: 0 (int), size: 4, data: 0x5622d0d1a2d0
+[CBox Value] CBox<int>: 42
+CBox<int>: 42
+[CBox JSON] {"type":"int","value":42,"address":"0x5622d0d1a2d0"}
+[CBox] type: 1 (float), size: 4, data: 0x5622d0d1a320
+[CBox Value] CBox<float>: 23.500000
+CBox<float>: 23.500000
+[CBox JSON] {"type":"float","value":23.500000,"address":"0x5622d0d1a320"}
+[CBox] type: 3 (struct), size: 40, data: 0x5622d0d1a370
+[CBox Value] SensorReading{id: sensor-A1, value: 78.90, time: 169765}
+SensorReading{id: sensor-A1, value: 78.90, time: 169765}
+[CBox JSON] {"type":"SensorReading","sensor_id":"sensor-A1","value":78.90,"timestamp":169765,"address":"0x5622d0d1a370"}
 ```
 
 

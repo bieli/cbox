@@ -1,7 +1,7 @@
-#include "cbox_struct.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "cbox_struct.h"
 
 void* person_clone(const void* data) {
     Person* copy = malloc(sizeof(Person));

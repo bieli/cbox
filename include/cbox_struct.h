@@ -3,8 +3,10 @@
 
 #include "cbox.h"
 
+#define MAX_CBOX_STRUCT_LEN 32
+
 typedef struct {
-    char name[32];
+    char name[MAX_CBOX_STRUCT_LEN];
     int age;
 } Person;
 
