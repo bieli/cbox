@@ -61,7 +61,10 @@ $ cd cbox
 $ make
 ```
 
-This builds the static library libcbox.a and compiles examples in examples/.
+This builds:
+- the static library `libcbox.a` inside created `lib/` directory
+- the shared library `libcbox.so` inside created `lib/` directory
+- and compiles all examples from `examples/` to `build/` directory
 
 ## API Overview
 
