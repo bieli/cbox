@@ -56,7 +56,7 @@ You need to know, that not all `RUST` features were implemented yet.
 ## Installation
 
 ```bash
-$ git clone https://github.com/yourname/cbox.git
+$ git clone https://github.com/bieli/cbox.git
 $ cd cbox
 $ make
 ```
