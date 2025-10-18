@@ -30,7 +30,6 @@ void float_print(const void* data) {
     printf("CBox<float>: %f\n", *(float*)data);
 }
 
-
 void* double_clone(const void* data) {
     double* copy = malloc(sizeof(double));
     if (copy) *copy = *(double*)data;
@@ -138,4 +137,3 @@ CBoxTrait CBOX_DOUBLE_TRAIT = {
     .print = double_print,
     .serialize_json = double_serialize_json
 };
-
