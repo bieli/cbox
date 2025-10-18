@@ -6,6 +6,7 @@
 #include <string.h>
 
 typedef enum {
+    CBOX_BOOL,
     CBOX_INT,
     CBOX_FLOAT,
     CBOX_DOUBLE,

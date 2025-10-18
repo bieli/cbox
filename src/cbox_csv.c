@@ -3,11 +3,16 @@
 #include <string.h>
 #include <ctype.h>
 #include "cbox_csv.h"
+#include "cbox_bool.h"
 #include "cbox_decimal.h"
 #include "cbox_container.h"
 
 static CBox* guess_type(const char* token) {
-    if (strchr(token, '.') != NULL) {
+    if (strcmp(token, "true") == 0 || strcmp(token, "false") == 0) {
+        bool* val = malloc(sizeof(bool));
+        *val = (strcmp(token, "true") == 0);
+        return cbox_new_with_trait(val, sizeof(bool), CBOX_BOOL, &CBOX_BOOL_TRAIT);
+    } else if (strchr(token, '.') != NULL) {
         double* val = malloc(sizeof(double));
         *val = atof(token);
         return cbox_new_with_trait(val, sizeof(double), CBOX_DOUBLE, &CBOX_DOUBLE_TRAIT);
