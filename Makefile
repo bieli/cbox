@@ -12,6 +12,8 @@ TEST_SRC_INTARRAY = tests/test_cbox_intarray.c
 TEST_BIN_INTARRAY = build/test_cbox_intarray
 TEST_SRC_CONTAINER = tests/test_cbox_container.c
 TEST_BIN_CONTAINER = build/test_cbox_container
+TEST_BOOL_SRC = tests/test_cbox_bool.c
+TEST_BOOL_BIN = build/test_cbox_bool
 
 
 CC = gcc
@@ -68,6 +70,13 @@ test-cbox: $(TEST_CBOX_BIN)
 $(TEST_CBOX_BIN): $(TEST_CBOX_SRC) libcbox.a
 	$(CC) $(CFLAGS) -Iinclude $(TEST_CBOX_SRC) libcbox.a -o $(TEST_CBOX_BIN)
 
+test-bool: $(TEST_BOOL_BIN)
+	@echo "Running cbox_bool unit tests..."
+	@./$(TEST_BOOL_BIN)
+
+$(TEST_BOOL_BIN): $(TEST_BOOL_SRC) libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_BOOL_SRC) libcbox.a -o $(TEST_BOOL_BIN)
+
 test-intarray: $(TEST_BIN_INTARRAY)
 	@echo "Running intarray unit tests..."
 	@./$(TEST_BIN_INTARRAY)
@@ -86,6 +95,8 @@ test:
 	@echo "Running all unit tests..."
 	@echo "\n"
 	@make test-cbox
+	@echo "\n"
+	@make test-bool
 	@echo "\n"
 	@make test-core
 	@echo "\n"

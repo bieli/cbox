@@ -3,6 +3,14 @@
 #include <stdbool.h>
 #include "cbox.h"
 
+bool* cbox_bool_alloc(bool value) {
+    bool* ptr = malloc(sizeof(bool));
+    if (ptr) {
+        *ptr = value;
+    }
+    return ptr;
+}
+
 void* bool_clone(const void* data) {
     bool* copy = malloc(sizeof(bool));
     *copy = *(bool*)data;
