@@ -9,6 +9,7 @@ static inline const char* cbox_type_name(CBoxType type) {
         case CBOX_INT:    return "int";
         case CBOX_FLOAT:  return "float";
         case CBOX_DOUBLE: return "double";
+        case CBOX_DECIMAL: return "decimal";
         case CBOX_STRUCT: return "struct";
         case CBOX_ARRAY:  return "array";
         default:          return "unknown";

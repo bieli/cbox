@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include "cbox.h"
 #include "cbox_struct.h"
+#include "cbox_decimal.h"
 #include "cbox_debug.h"
+
 
 int main() {
     // Example 1: Wrapping an int
@@ -27,10 +29,17 @@ int main() {
     printf("== PERSON BOX ==\n");
     CBOX_DEBUG_ALL(person_box);
 
+    // Example 2: Wrapping a decimal value
+    Decimal dec = { .whole = 12, .fraction = 34 };
+    printf("== DECIMAL BOX ==\n");
+    CBox* decimal_box = CBOX_WRAP_DECIMAL(dec);
+    CBOX_DEBUG_ALL(decimal_box);
+
     // Cleanup
     cbox_free(int_box);
     cbox_free(int_clone);
     cbox_free(float_box);
+    cbox_free(decimal_box);
     cbox_free(person_box);
 
     return 0;

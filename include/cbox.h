@@ -9,6 +9,7 @@ typedef enum {
     CBOX_INT,
     CBOX_FLOAT,
     CBOX_DOUBLE,
+    CBOX_DECIMAL,
     CBOX_STRUCT,
     CBOX_ARRAY
 } CBoxType;

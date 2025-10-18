@@ -166,6 +166,11 @@ CBox<float>: 3.140000
 [CBox Value] Person{name: Alice, age: 30}
 Person{name: Alice, age: 30}
 [CBox JSON] {"type":"Person","name":"Alice","age":30,"address":"0x55ca186817d0"}
+== DECIMAL BOX ==
+[CBox] type: 3 (decimal), size: 8, data: 0x55e52b199830
+[CBox Value] CBox<decimal>: 12.34
+CBox<decimal>: 12.34
+[CBox JSON] {"type":"Decimal","value":"12.34"}
 ```
 
 ### [examples/cbox_debug.c](examples/cbox_debug.c)
