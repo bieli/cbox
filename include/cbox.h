@@ -10,8 +10,10 @@ typedef enum {
     CBOX_FLOAT,
     CBOX_DOUBLE,
     CBOX_STRUCT,
-    CBOX_UNKNOWN
+    CBOX_ARRAY
 } CBoxType;
+
+typedef struct CBox CBox;
 
 typedef struct {
     void* (*clone)(const void* data);
@@ -20,27 +22,13 @@ typedef struct {
     void  (*serialize_json)(const void* data, char* out, size_t maxlen);
 } CBoxTrait;
 
-/*
-CBoxTrait CBOX_FLOAT_TRAIT = {
-    .clone = float_clone,
-    .destroy = float_destroy,
-    .print = float_print,
-    .serialize_json = float_serialize_json
-};
 
-CBoxTrait CBOX_DOUBLE_TRAIT = {
-    .clone = double_clone,
-    .destroy = double_destroy,
-    .print = double_print,
-    .serialize_json = double_serialize_json
-};
-*/
-
-typedef struct {
+typedef struct CBox {
     void* data;
     size_t size;
     CBoxType type;
     CBoxTrait* trait;
+    const CBox* parent; // reference to original CBox if cloned
 } CBox;
 
 CBox* cbox_new_with_trait(void* value, size_t size, CBoxType type, CBoxTrait* trait);

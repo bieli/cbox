@@ -20,13 +20,15 @@ void person_print(const void* data) {
 
 void person_serialize_json(const void* data, char* out, size_t maxlen) {
     const Person* p = (const Person*)data;
-    snprintf(out, maxlen, "{\"name\":\"%s\",\"age\":%d}", p->name, p->age);
+    snprintf(out, maxlen,
+        "{\"type\":\"Person\",\"name\":\"%s\",\"age\":%d,\"address\":\"%p\"}",
+        p->name, p->age, data);
 }
 
 CBoxTrait CBOX_PERSON_TRAIT = {
     .clone = person_clone,
     .destroy = person_destroy,
-    .print = person_print
-    // TODO: add .serialize = person_serialize_json to extends CBoxTrait
+    .print = person_print,
+    .serialize_json = person_serialize_json
 };
 

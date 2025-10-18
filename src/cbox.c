@@ -16,12 +16,6 @@ void int_print(const void* data) {
     printf("CBox<int>: %d\n", *(int*)data);
 }
 
-CBoxTrait CBOX_INT_TRAIT = {
-    .clone = int_clone,
-    .destroy = int_destroy,
-    .print = int_print
-};
-
 void* float_clone(const void* data) {
     float* copy = malloc(sizeof(float));
     if (copy) *copy = *(float*)data;
@@ -36,11 +30,6 @@ void float_print(const void* data) {
     printf("CBox<float>: %f\n", *(float*)data);
 }
 
-CBoxTrait CBOX_FLOAT_TRAIT = {
-    .clone = float_clone,
-    .destroy = float_destroy,
-    .print = float_print
-};
 
 void* double_clone(const void* data) {
     double* copy = malloc(sizeof(double));
@@ -55,12 +44,6 @@ void double_destroy(void* data) {
 void double_print(const void* data) {
     printf("CBox<double>: %lf\n", *(double*)data);
 }
-
-CBoxTrait CBOX_DOUBLE_TRAIT = {
-    .clone = double_clone,
-    .destroy = double_destroy,
-    .print = double_print
-};
 
 CBox* cbox_new_with_trait(void* value, size_t size, CBoxType type, CBoxTrait* trait) {
     CBox* box = malloc(sizeof(CBox));
@@ -90,9 +73,11 @@ CBox* cbox_clone(const CBox* original) {
     clone->size = original->size;
     clone->type = original->type;
     clone->trait = original->trait;
+    clone->parent = original;  // Track origin
 
     return clone;
 }
+
 
 void cbox_print(const CBox* box) {
     if (!box || !box->trait || !box->trait->print) {
@@ -110,12 +95,16 @@ void cbox_to_json(const CBox* box, char* out, size_t maxlen) {
     box->trait->serialize_json(box->data, out, maxlen);
 }
 
+void int_serialize_json(const void* data, char* out, size_t maxlen) {
+    snprintf(out, maxlen, "{\"type\":\"int\",\"value\":%d,\"address\":\"%p\"}", *(int*)data, data);
+}
+
 void float_serialize_json(const void* data, char* out, size_t maxlen) {
-    snprintf(out, maxlen, "{\"type\":\"float\",\"value\":%f}", *(float*)data);
+    snprintf(out, maxlen, "{\"type\":\"float\",\"value\":%f,\"address\":\"%p\"}", *(float*)data, data);
 }
 
 void double_serialize_json(const void* data, char* out, size_t maxlen) {
-    snprintf(out, maxlen, "{\"type\":\"double\",\"value\":%lf}", *(double*)data);
+    snprintf(out, maxlen, "{\"type\":\"double\",\"value\":%lf,\"address\":\"%p\"}", *(double*)data, data);
 }
 
 void cbox_free(CBox* box) {
@@ -127,4 +116,26 @@ void cbox_free(CBox* box) {
         free(box);
     }
 }
+
+
+CBoxTrait CBOX_INT_TRAIT = {
+    .clone = int_clone,
+    .destroy = int_destroy,
+    .print = int_print,
+    .serialize_json = int_serialize_json
+};
+
+CBoxTrait CBOX_FLOAT_TRAIT = {
+    .clone = float_clone,
+    .destroy = float_destroy,
+    .print = float_print,
+    .serialize_json = float_serialize_json
+};
+
+CBoxTrait CBOX_DOUBLE_TRAIT = {
+    .clone = double_clone,
+    .destroy = double_destroy,
+    .print = double_print,
+    .serialize_json = double_serialize_json
+};
 
