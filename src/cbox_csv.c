@@ -5,6 +5,7 @@
 #include "cbox_csv.h"
 #include "cbox_bool.h"
 #include "cbox_decimal.h"
+#include "cbox_date.h"
 #include "cbox_container.h"
 
 static CBox* guess_type(const char* token) {
@@ -12,19 +13,28 @@ static CBox* guess_type(const char* token) {
         bool* val = malloc(sizeof(bool));
         *val = (strcmp(token, "true") == 0);
         return cbox_new_with_trait(val, sizeof(bool), CBOX_BOOL, &CBOX_BOOL_TRAIT);
-    } else if (strchr(token, '.') != NULL) {
+    }
+
+    CBoxDate* date = cbox_date_parse(token);
+    if (date) {
+        return cbox_new_with_trait(date, sizeof(CBoxDate), CBOX_DATE, &CBOX_DATE_TRAIT);
+    }
+
+    if (strchr(token, '.') != NULL) {
         double* val = malloc(sizeof(double));
         *val = atof(token);
         return cbox_new_with_trait(val, sizeof(double), CBOX_DOUBLE, &CBOX_DOUBLE_TRAIT);
-    } else if (isdigit(token[0]) || (token[0] == '-' && isdigit(token[1]))) {
+    }
+
+    if (isdigit(token[0]) || (token[0] == '-' && isdigit(token[1]))) {
         int* val = malloc(sizeof(int));
         *val = atoi(token);
         return cbox_new_with_trait(val, sizeof(int), CBOX_INT, &CBOX_INT_TRAIT);
-    } else {
-        char* copied = malloc(strlen(token) + 1);
-        strcpy(copied, token);
-        return cbox_new_with_trait(copied, strlen(token) + 1, CBOX_STRUCT, &CBOX_STRUCT_TRAIT);
     }
+
+    char* copied = malloc(strlen(token) + 1);
+    strcpy(copied, token);
+    return cbox_new_with_trait(copied, strlen(token) + 1, CBOX_STRUCT, &CBOX_STRUCT_TRAIT);
 }
 
 CBoxCSV* read_csv(const char* path, char separator, bool skip_header, size_t max_rows) {

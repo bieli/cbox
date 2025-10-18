@@ -14,7 +14,8 @@ TEST_SRC_CONTAINER = tests/test_cbox_container.c
 TEST_BIN_CONTAINER = build/test_cbox_container
 TEST_BOOL_SRC = tests/test_cbox_bool.c
 TEST_BOOL_BIN = build/test_cbox_bool
-
+TEST_DATE_SRC = tests/test_cbox_date.c
+TEST_DATE_BIN = build/test_cbox_date
 
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -I$(INCLUDE_DIR) -g
@@ -76,6 +77,13 @@ test-bool: $(TEST_BOOL_BIN)
 
 $(TEST_BOOL_BIN): $(TEST_BOOL_SRC) libcbox.a
 	$(CC) $(CFLAGS) -Iinclude $(TEST_BOOL_SRC) libcbox.a -o $(TEST_BOOL_BIN)
+
+test-bool: $(TEST_DATE_BIN)
+	@echo "Running cbox_date unit tests..."
+	@./$(TEST_DATE_BIN)
+
+$(TEST_DATE_BIN): $(TEST_DATE_SRC) libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_DATE_SRC) libcbox.a -o $(TEST_DATE_BIN)
 
 test-intarray: $(TEST_BIN_INTARRAY)
 	@echo "Running intarray unit tests..."

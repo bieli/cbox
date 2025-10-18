@@ -11,6 +11,7 @@ typedef enum {
     CBOX_FLOAT,
     CBOX_DOUBLE,
     CBOX_DECIMAL,
+    CBOX_DATE,
     CBOX_STRUCT,
     CBOX_ARRAY,
     CBOX_CONTAINER,

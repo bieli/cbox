@@ -314,22 +314,18 @@ CBoxCSV: 4 rows × 5 columns
 Columns: Name, Age, Height, Member, JoinDate
 Row 0: string: "Alice" CBox<int>: 30
  CBox<double>: 1.650000
- bool: true CBox<int>: 2021
- 
+ bool: true date: 2021-06-15 
 Row 1: string: "Bob" CBox<int>: 25
  CBox<double>: 1.800000
- bool: false CBox<int>: 2022
- 
+ bool: false date: 2022-01-10 
 Row 2: string: "Charlie" CBox<int>: 40
  CBox<double>: 1.750000
- bool: true CBox<int>: 2020
- 
+ bool: true date: 2020-09-05 
 Row 3: string: "Diana" CBox<int>: 35
  CBox<double>: 1.600000
- bool: false CBox<int>: 2023
- 
+ bool: false date: 2023-03-22 
 JSON:
-{"type":"CBoxCSV","rows":[[{"type":"string","value":"Alice"},{"type":"int","value":30,"address":"0x562be7de19d0"},{"type":"double","value":1.650000,"address":"0x562be7de1a40"},{"type":"bool","value":true},{"type":"int","value":2021,"address":"0x562be7de1b20"}],[{"type":"string","value":"Bob"},{"type":"int","value":25,"address":"0x562be7de1c50"},{"type":"double","value":1.800000,"address":"0x562be7de1cc0"},{"type":"bool","value":false},{"type":"int","value":2022,"address":"0x562be7de1da0"}],[{"type":"string","value":"Charlie"},{"type":"int","value":40,"address":"0x562be7de1ed0"},{"type":"double","value":1.750000,"address":"0x562be7de1f40"},{"type":"bool","value":true},{"type":"int","value":2020,"address":"0x562be7de2020"}],[{"type":"string","value":"Diana"},{"type":"int","value":35,"address":"0x562be7de2150"},{"type":"double","value":1.600000,"address":"0x562be7de21c0"},{"type":"bool","value":false},{"type":"int","value":2023,"address":"0x562be7de22a0"}]]}
+{"type":"CBoxCSV","rows":[[{"type":"string","value":"Alice"},{"type":"int","value":30,"address":"0x55cccba469d0"},{"type":"double","value":1.650000,"address":"0x55cccba46a40"},{"type":"bool","value":true},{"type":"date","value":"2021-06-15"}],[{"type":"string","value":"Bob"},{"type":"int","value":25,"address":"0x55cccba46c50"},{"type":"double","value":1.800000,"address":"0x55cccba46cc0"},{"type":"bool","value":false},{"type":"date","value":"2022-01-10"}],[{"type":"string","value":"Charlie"},{"type":"int","value":40,"address":"0x55cccba46ed0"},{"type":"double","value":1.750000,"address":"0x55cccba46f40"},{"type":"bool","value":true},{"type":"date","value":"2020-09-05"}],[{"type":"string","value":"Diana"},{"type":"int","value":35,"address":"0x55cccba47150"},{"type":"double","value":1.600000,"address":"0x55cccba471c0"},{"type":"bool","value":false},{"type":"date","value":"2023-03-22"}]]}
 ```
 
 
