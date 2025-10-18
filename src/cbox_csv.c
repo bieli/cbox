@@ -7,6 +7,7 @@
 #include "cbox_bool.h"
 #include "cbox_decimal.h"
 #include "cbox_date.h"
+#include "cbox_currency.h"
 #include "cbox_container.h"
 
 static CBox* guess_type(const char* token) {
@@ -41,61 +42,6 @@ static CBox* guess_type(const char* token) {
     char* copied = malloc(strlen(token) + 1);
     strcpy(copied, token);
     return cbox_new_with_trait(copied, strlen(token) + 1, CBOX_STRUCT, &CBOX_STRUCT_TRAIT);
-}
-
-CBox* cbox_currency_parse(const char* token) {
-    if (!token || strlen(token) < 2) return NULL;
-
-    size_t len = strlen(token);
-    const char* numeric_start = token;
-    size_t numeric_len = len;
-
-    // Detect $ at beginning
-    if (token[0] == '$') {
-        numeric_start = token + 1;
-        numeric_len = len - 1;
-    }
-    // Detect $ at end
-    else if (token[len - 1] == '$') {
-        numeric_start = token;
-        numeric_len = len - 1;
-    }
-    // Detect € at beginning (UTF-8: 3 bytes)
-    else if (strncmp(token, "€", 3) == 0) {
-        numeric_start = token + 3;
-        numeric_len = len - 3;
-    }
-    // Detect € at end
-    else if (len >= 3 && strncmp(&token[len - 3], "€", 3) == 0) {
-        numeric_start = token;
-        numeric_len = len - 3;
-    } else {
-        return NULL;
-    }
-
-    // Copy numeric portion
-    char* numeric = malloc(numeric_len + 1);
-    if (!numeric) return NULL;
-
-    strncpy(numeric, numeric_start, numeric_len);
-    numeric[numeric_len] = '\0';
-
-    // Convert to double
-    char* endptr = NULL;
-    double value = strtod(numeric, &endptr);
-    free(numeric);
-
-    // Validate conversion
-    if (endptr == numeric || *endptr != '\0') {
-        return NULL;
-    }
-
-    // Box the value correctly
-    double* boxed = malloc(sizeof(double));
-    if (!boxed) return NULL;
-    *boxed = value;
-
-    return cbox_new_with_trait(boxed, sizeof(double), CBOX_DECIMAL, &CBOX_DECIMAL_TRAIT);
 }
 
 CBoxCSV* read_csv(const char* path, char separator, bool skip_header, size_t max_rows) {

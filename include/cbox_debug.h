@@ -7,13 +7,18 @@
 
 static inline const char* cbox_type_name(CBoxType type) {
     switch (type) {
-        case CBOX_INT:    return "int";
-        case CBOX_FLOAT:  return "float";
-        case CBOX_DOUBLE: return "double";
-        case CBOX_DECIMAL: return "decimal";
-        case CBOX_STRUCT: return "struct";
-        case CBOX_ARRAY:  return "array";
-        default:          return "unknown";
+        case CBOX_BOOL:      return "bool";
+        case CBOX_INT:       return "int";
+        case CBOX_FLOAT:     return "float";
+        case CBOX_DOUBLE:    return "double";
+        case CBOX_DECIMAL:   return "decimal";
+        case CBOX_DATE:      return "date";
+        case CBOX_CURRENCY:  return "currency";
+        case CBOX_STRUCT:    return "struct";
+        case CBOX_ARRAY:     return "array";
+        case CBOX_CONTAINER: return "container";
+        case CBOX_CSV:       return "csv";
+        default:             return "unknown";
     }
 }
 

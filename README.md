@@ -77,6 +77,7 @@ typedef enum {
     CBOX_DOUBLE,
     CBOX_DECIMAL,
     CBOX_DATE,
+    CBOX_CURRENCY,
     CBOX_STRUCT,
     CBOX_ARRAY,
     CBOX_CONTAINER,
@@ -141,6 +142,7 @@ float         | CBOX_FLOAT_TRAIT     | Yes
 double        | CBOX_DOUBLE_TRAIT    | Yes
 decimal       | CBOX_DECIMAL_TRAIT   | Yes
 data          | CBOX_DATE_TRAIT      | Yes
+currency      | CBOX_CURRENCY_TRAIT  | Yes
 struct        | CBOX_STRUCT_TRAIT    | Yes
 Person        | CBOX_PERSON_TRAIT    | Yes
 Product       | CBOX_PRODUCT_TRAIT   | Yes
@@ -354,6 +356,23 @@ JSON:
 {"type":"CBoxCSV","rows":[[{"type":"string","value":"Alice"},{"type":"int","value":30,"address":"0x559c1dc229d0"},{"type":"double","value":1.650000,"address":"0x559c1dc22a40"},{"type":"bool","value":true},{"type":"date","value":"2021-06-15"}],[{"type":"string","value":"Bob"},{"type":"int","value":25,"address":"0x559c1dc22c50"},{"type":"double","value":1.800000,"address":"0x559c1dc22cc0"},{"type":"bool","value":false},{"type":"date","value":"2022-01-10"}],[{"type":"string","value":"Charlie"},{"type":"int","value":40,"address":"0x559c1dc22ed0"},{"type":"double","value":1.750000,"address":"0x559c1dc22f40"},{"type":"bool","value":true},{"type":"date","value":"2020-09-05"}],[{"type":"string","value":"Diana"},{"type":"int","value":35,"address":"0x559c1dc23150"},{"type":"double","value":1.600000,"address":"0x559c1dc231c0"},{"type":"bool","value":false},{"type":"date","value":"2023-03-22"}]]}
 ```
 
+
+### [examples/cbox_currency_demo.c](examples/cbox_currency_demo.c)
+
+```bash
+$ make
+$ ./build/cbox_currency_demo
+Printing currency object:
+CBox<currency>: CBox<decimal>: 8425.95
+ CBox<string>: "EUR"
+JSON output:
+{"type":"currency","amount":{"type":"Decimal","value":"8425.95"},"code":{"type":"string","value":"EUR"}}
+
+CBox<currency>: CBox<decimal>: 10.12
+ CBox<string>: "USD"
+JSON output:
+{"type":"currency","amount":{"type":"Decimal","value":"10.12"},"code":{"type":"string","value":"USD"}}
+```
 
 ## Unit tests run
 

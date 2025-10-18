@@ -12,6 +12,7 @@ typedef enum {
     CBOX_DOUBLE,
     CBOX_DECIMAL,
     CBOX_DATE,
+    CBOX_CURRENCY,
     CBOX_STRUCT,
     CBOX_ARRAY,
     CBOX_CONTAINER,
