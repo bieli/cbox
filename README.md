@@ -73,7 +73,8 @@ typedef enum {
     CBOX_DOUBLE,
     CBOX_DECIMAL,
     CBOX_STRUCT,
-    CBOX_ARRAY
+    CBOX_ARRAY,
+    CBOX_CONTAINER
 } CBoxType;
 ```
 
@@ -126,15 +127,16 @@ CBOX_DEBUG_INFO_VERBOSE(box); // includes parent reference and JSON
 ## Supported Types
 
 ```bash
-Type      | Trait Name          | JSON Support
------------------------------------------------
-int       | CBOX_INT_TRAIT      | Yes
-float     | CBOX_FLOAT_TRAIT    | Yes
-double    | CBOX_DOUBLE_TRAIT   | Yes
-decimal   | CBOX_DECIMAL_TRAIT  | Yes
-Person    | CBOX_PERSON_TRAIT   | Yes
-Product   | CBOX_PRODUCT_TRAIT  | Yes
-IntArray  | CBOX_INTARRAY_TRAIT | Yes
+Type          | Trait Name           | JSON Support
+-------------------------------------------------------
+int           | CBOX_INT_TRAIT       | Yes
+float         | CBOX_FLOAT_TRAIT     | Yes
+double        | CBOX_DOUBLE_TRAIT    | Yes
+decimal       | CBOX_DECIMAL_TRAIT   | Yes
+Person        | CBOX_PERSON_TRAIT    | Yes
+Product       | CBOX_PRODUCT_TRAIT   | Yes
+IntArray      | CBOX_INTARRAY_TRAIT  | Yes
+CBoxContainer | CBOX_CONTAINER_TRAIT | Yes
 ```
 
 You can define your own types and traits by implementing the four trait functions.
@@ -200,6 +202,17 @@ IntArray[3]: 1 2 3
 $ make
 $ ./build/cbox_registry 
 JSON: {"type":"int","value":42,"address":"0x5643e92982d0"}
+```
+
+### [examples/cbox_container_demo.c](examples/cbox_container_demo.c)
+
+```bash
+$ make
+$ ./build/cbox_container_demo 
+CBoxContainer[3]:
+  [0] CBox<decimal>: 1.99
+  [1] IntArray[2]: 10 20 
+  [2] IntArray[4]: 101 102 103 104
 ```
 
 ### [examples/cbox_task_queue.c](examples/cbox_task_queue.c)

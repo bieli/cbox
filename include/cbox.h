@@ -11,7 +11,8 @@ typedef enum {
     CBOX_DOUBLE,
     CBOX_DECIMAL,
     CBOX_STRUCT,
-    CBOX_ARRAY
+    CBOX_ARRAY,
+    CBOX_CONTAINER
 } CBoxType;
 
 typedef struct CBox CBox;

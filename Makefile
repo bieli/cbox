@@ -10,6 +10,8 @@ TEST_SRC_STRUCT = tests/test_cbox_struct.c
 TEST_BIN_STRUCT = build/test_cbox_struct
 TEST_SRC_INTARRAY = tests/test_cbox_intarray.c
 TEST_BIN_INTARRAY = build/test_cbox_intarray
+TEST_SRC_CONTAINER = tests/test_cbox_container.c
+TEST_BIN_CONTAINER = build/test_cbox_container
 
 
 CC = gcc
@@ -73,6 +75,13 @@ test-intarray: $(TEST_BIN_INTARRAY)
 $(TEST_BIN_INTARRAY): $(TEST_SRC_INTARRAY) libcbox.a
 	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_INTARRAY) libcbox.a -o $(TEST_BIN_INTARRAY)
 
+test-container: $(TEST_BIN_CONTAINER)
+	@echo "Running container unit tests..."
+	@./$(TEST_BIN_CONTAINER)
+
+$(TEST_BIN_CONTAINER): $(TEST_SRC_CONTAINER) libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_CONTAINER) libcbox.a -o $(TEST_BIN_CONTAINER)
+
 test:
 	@echo "Running all unit tests..."
 	@echo "\n"
@@ -83,6 +92,8 @@ test:
 	@make test-struct
 	@echo "\n"
 	@make test-intarray
+	@echo "\n"
+	@make test-container
 
 clean:
 	rm -rf $(BUILD_DIR) libcbox.a
