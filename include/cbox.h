@@ -12,7 +12,8 @@ typedef enum {
     CBOX_DECIMAL,
     CBOX_STRUCT,
     CBOX_ARRAY,
-    CBOX_CONTAINER
+    CBOX_CONTAINER,
+    CBOX_CSV
 } CBoxType;
 
 typedef struct CBox CBox;
@@ -34,6 +35,7 @@ typedef struct CBox {
 } CBox;
 
 CBox* cbox_new_with_trait(void* value, size_t size, CBoxType type, CBoxTrait* trait);
+CBox* cbox_new(void* data, size_t size, CBoxType type);
 CBox* cbox_clone(const CBox* original);
 void  cbox_to_json(const CBox* box, char* out, size_t maxlen);
 void  cbox_print(const CBox* box);
@@ -43,10 +45,12 @@ void  cbox_free(CBox* box);
 extern CBoxTrait CBOX_INT_TRAIT;
 extern CBoxTrait CBOX_FLOAT_TRAIT;
 extern CBoxTrait CBOX_DOUBLE_TRAIT;
+extern CBoxTrait CBOX_STRUCT_TRAIT;
 
 #define CBOX_WRAP_INT(x)     cbox_new_with_trait(&(x), sizeof(int), CBOX_INT, &CBOX_INT_TRAIT)
 #define CBOX_WRAP_FLOAT(x)   cbox_new_with_trait(&(x), sizeof(float), CBOX_FLOAT, &CBOX_FLOAT_TRAIT)
 #define CBOX_WRAP_DOUBLE(x)  cbox_new_with_trait(&(x), sizeof(double), CBOX_DOUBLE, &CBOX_DOUBLE_TRAIT)
+#define CBOX_WRAP_STRUCT(x)  cbox_new_with_trait(&(x), sizeof(double), CBOX_STRUCT, &CBOX_STRUCT_TRAIT)
 
 #endif // CBOX_H
 

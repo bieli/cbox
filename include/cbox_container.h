@@ -17,5 +17,9 @@ extern CBoxTrait CBOX_CONTAINER_TRAIT;
 
 CBoxContainer* cbox_container_create(size_t initial_capacity);
 int cbox_container_add(CBoxContainer* container, CBox* item);
+void* container_clone(const void* data);
+void container_destroy(void* data);
+void container_print(const void* data);
+void container_serialize_json(const void* data, char* out, size_t size);
 
 #endif // CBOX_CONTAINER_H

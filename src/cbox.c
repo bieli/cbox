@@ -2,6 +2,18 @@
 
 // Traits impl. for simple types
 
+CBox* cbox_new(void* data, size_t size, CBoxType type) {
+    CBox* box = malloc(sizeof(CBox));
+    if (!box) return NULL;
+
+    box->type = type;
+    box->size = size;
+    box->data = data;
+    box->trait = NULL;
+    box->parent = NULL;
+    return box;
+}
+
 void* int_clone(const void* data) {
     int* copy = malloc(sizeof(int));
     if (copy) *copy = *(int*)data;
@@ -116,6 +128,23 @@ void cbox_free(CBox* box) {
     }
 }
 
+void* basic_clone(const void* data) {
+    (void)data;  // explicitly ignore unused parameter
+    return NULL;
+}
+
+void basic_destroy(void* data) {
+    free(data);
+}
+
+void basic_print_string(const void* data) {
+    printf("string: \"%s\"", (char*)data);
+}
+
+void basic_json_string(const void* data, char* out, size_t size) {
+    snprintf(out, size, "{\"type\":\"string\",\"value\":\"%s\"}", (char*)data);
+}
+
 
 CBoxTrait CBOX_INT_TRAIT = {
     .clone = int_clone,
@@ -136,4 +165,11 @@ CBoxTrait CBOX_DOUBLE_TRAIT = {
     .destroy = double_destroy,
     .print = double_print,
     .serialize_json = double_serialize_json
+};
+
+CBoxTrait CBOX_STRUCT_TRAIT = {
+    .clone = basic_clone,
+    .destroy = basic_destroy,
+    .print = basic_print_string,
+    .serialize_json = basic_json_string
 };
