@@ -17,7 +17,24 @@ typedef struct {
     void* (*clone)(const void* data);
     void  (*destroy)(void* data);
     void  (*print)(const void* data);
+    void  (*serialize_json)(const void* data, char* out, size_t maxlen);
 } CBoxTrait;
+
+/*
+CBoxTrait CBOX_FLOAT_TRAIT = {
+    .clone = float_clone,
+    .destroy = float_destroy,
+    .print = float_print,
+    .serialize_json = float_serialize_json
+};
+
+CBoxTrait CBOX_DOUBLE_TRAIT = {
+    .clone = double_clone,
+    .destroy = double_destroy,
+    .print = double_print,
+    .serialize_json = double_serialize_json
+};
+*/
 
 typedef struct {
     void* data;
@@ -28,6 +45,7 @@ typedef struct {
 
 CBox* cbox_new_with_trait(void* value, size_t size, CBoxType type, CBoxTrait* trait);
 CBox* cbox_clone(const CBox* original);
+void  cbox_to_json(const CBox* box, char* out, size_t maxlen);
 void  cbox_print(const CBox* box);
 void  cbox_free(CBox* box);
 

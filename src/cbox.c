@@ -102,6 +102,22 @@ void cbox_print(const CBox* box) {
     box->trait->print(box->data);
 }
 
+void cbox_to_json(const CBox* box, char* out, size_t maxlen) {
+    if (!box || !box->trait || !box->trait->serialize_json) {
+        snprintf(out, maxlen, "\"CBox\": null");
+        return;
+    }
+    box->trait->serialize_json(box->data, out, maxlen);
+}
+
+void float_serialize_json(const void* data, char* out, size_t maxlen) {
+    snprintf(out, maxlen, "{\"type\":\"float\",\"value\":%f}", *(float*)data);
+}
+
+void double_serialize_json(const void* data, char* out, size_t maxlen) {
+    snprintf(out, maxlen, "{\"type\":\"double\",\"value\":%lf}", *(double*)data);
+}
+
 void cbox_free(CBox* box) {
     if (box) {
         if (box->trait && box->trait->destroy)
