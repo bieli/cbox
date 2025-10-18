@@ -3,6 +3,7 @@
 #include <string.h>
 #include "cbox.h"
 #include "cbox_struct.h"
+#include "test_utils.h"
 
 // Helper to check if JSON contains a key-value pair
 int json_has(const char* json, const char* key, const char* value) {
@@ -79,11 +80,6 @@ int main() {
     printf("Running test_destroy_person...\n");
     failed += test_destroy_person();
 
-    if (failed == 0) {
-        printf("[   OK   ] All cbox_struct tests passed.\n");
-        return 0;
-    } else {
-        printf("[ FAILED ] %d test(s) failed.\n", failed);
-        return 1;
-    }
+    PRINT_TEST_RESULT("cbox_struct tests", "cbox_struct", failed);
+    return failed;
 }

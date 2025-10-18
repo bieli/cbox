@@ -5,6 +5,7 @@
 #include "cbox_container.h"
 #include "cbox_decimal.h"
 #include "cbox_array.h"
+#include "test_utils.h"
 
 // Helper to create a boxed Decimal
 CBox* make_decimal(int whole, int fraction) {
@@ -95,11 +96,6 @@ int main() {
     printf("Running test_container_json...\n");
     failed += test_container_json();
 
-    if (failed == 0) {
-        printf("[   OK   ] All container tests passed.\n");
-    } else {
-        printf("[ FAILED ] %d container test(s) failed.\n", failed);
-    }
-
+    PRINT_TEST_RESULT("container tests", "Container", failed);
     return failed;
 }

@@ -3,6 +3,7 @@
 #include <string.h>
 #include "cbox.h"
 #include "cbox_struct.h"
+#include "test_utils.h"
 
 int test_cbox_int() {
     int value = 42;
@@ -52,11 +53,6 @@ int main() {
     printf("Running test_cbox_int_print...\n");
     failed += test_cbox_int_print();
 
-    if (failed == 0) {
-        printf("[   OK   ] All tests passed.\n");
-        return 0;
-    } else {
-        printf("[ FAILED ] %d test(s) failed.\n", failed);
-        return 1;
-    }
+    PRINT_TEST_RESULT("cbox tests", "cbox", failed);
+    return failed;
 }

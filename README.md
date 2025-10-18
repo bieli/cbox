@@ -288,6 +288,11 @@ SensorReading{id: sensor-A1, value: 78.90, time: 169765}
 [CBox JSON] {"type":"SensorReading","sensor_id":"sensor-A1","value":78.90,"timestamp":169765,"address":"0x5622d0d1a370"}
 ```
 
+## Unit tests run
+
+```bash
+$ make test
+```
 
 ## Contributing
 

@@ -3,6 +3,7 @@
 #include <string.h>
 #include "cbox.h"
 #include "cbox_array.h"
+#include "test_utils.h"
 
 // Helper to check if a value appears in JSON
 int json_has_value(const char* json, int value) {
@@ -150,11 +151,7 @@ int main() {
     printf("Running test_destroy_intarray...\n");
     failed += test_destroy_intarray();
 
-    if (failed == 0) {
-        printf("[   OK   ] All intarray tests passed.\n");
-        return 0;
-    } else {
-        printf("[ FAILED ] %d test(s) failed.\n", failed);
-        return 1;
-    }
+    PRINT_TEST_RESULT("cbox_intarray tests", "cbox_intarray", failed);
+    return failed;
 }
+

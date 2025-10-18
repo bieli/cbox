@@ -3,6 +3,7 @@
 #include <string.h>
 #include "cbox.h"
 #include "cbox_struct.h"
+#include "test_utils.h"
 
 // Helper for JSON validation
 int json_contains(const char* json, const char* key, const char* value) {
@@ -106,11 +107,6 @@ int main() {
     printf("Running test_json_serializers...\n");
     failed += test_json_serializers();
 
-    if (failed == 0) {
-        printf("[   OK   ] All core CBox tests passed.\n");
-        return 0;
-    } else {
-        printf("[ FAILED ] %d test(s) failed.\n", failed);
-        return 1;
-    }
+    PRINT_TEST_RESULT("cbox_core tests", "cbox_core", failed);
+    return failed;
 }
