@@ -29,6 +29,38 @@ int test_box_intarray() {
     return 0;
 }
 
+int test_create_valid_array() {
+    int values[] = {10, 20, 30};
+    IntArray* arr = intarray_create(3, values);
+    if (!arr) return 1;
+    if (arr->length != 3) return 2;
+    if (arr->values[0] != 10 || arr->values[1] != 20 || arr->values[2] != 30) return 3;
+    free(arr->values);
+    free(arr);
+    return 0;
+}
+
+int test_create_zero_length() {
+    int values[] = {1};
+    IntArray* arr = intarray_create(0, values);
+    if (arr != NULL) {
+        free(arr->values);
+        free(arr);
+        return 1;
+    }
+    return 0;
+}
+
+int test_create_null_values() {
+    IntArray* arr = intarray_create(3, NULL);
+    if (arr != NULL) {
+        free(arr->values);
+        free(arr);
+        return 1;
+    }
+    return 0;
+}
+
 int test_clone_intarray() {
     IntArray* arr = malloc(sizeof(IntArray));
     arr->length = 2;
@@ -96,6 +128,15 @@ int main() {
 
     printf("Running test_box_intarray...\n");
     failed += test_box_intarray();
+
+    printf("Running test_create_valid_array...\n");
+    failed += test_create_valid_array();
+
+    printf("Running test_create_zero_length...\n");
+    failed += test_create_zero_length();
+
+    printf("Running test_create_null_values...\n");
+    failed += test_create_null_values();
 
     printf("Running test_clone_intarray...\n");
     failed += test_clone_intarray();

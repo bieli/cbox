@@ -8,6 +8,7 @@ typedef struct {
     size_t length;
 } IntArray;
 
+IntArray* intarray_create(int length, const int* values);
 void* intarray_clone(const void* data);
 void  intarray_destroy(void* data);
 void  intarray_print(const void* data);

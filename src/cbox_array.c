@@ -3,6 +3,23 @@
 #include <stdlib.h>
 #include <string.h>
 
+IntArray* intarray_create(int length, const int* values) {
+    if (length <= 0 || values == NULL) return NULL;
+
+    IntArray* arr = malloc(sizeof(IntArray));
+    if (!arr) return NULL;
+
+    arr->length = length;
+    arr->values = malloc(sizeof(int) * length);
+    if (!arr->values) {
+        free(arr);
+        return NULL;
+    }
+
+    memcpy(arr->values, values, sizeof(int) * length);
+    return arr;
+}
+
 void* intarray_clone(const void* data) {
     const IntArray* original = (const IntArray*)data;
     IntArray* copy = malloc(sizeof(IntArray));

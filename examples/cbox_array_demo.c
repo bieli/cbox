@@ -21,7 +21,15 @@ int main() {
     CBox* clone = cbox_clone(box3);
     CBOX_DEBUG_ALL(clone);
 
+    int values[] = {41, 42, 43, 44};
+    size_t length = sizeof(values) / sizeof(values[0]);
+    IntArray* arr2 = intarray_create(length, values);
+    CBox* box4 = CBOX_WRAP_INTARRAY(arr2);
+
+    CBOX_DEBUG_ALL(box4);
+
     cbox_free(box3);
+    cbox_free(box4);
     cbox_free(clone);
 
     return 0;
