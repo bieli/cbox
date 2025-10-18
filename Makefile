@@ -2,6 +2,7 @@ INCLUDE_DIR     = include
 SRC_DIR         = src
 EXAMPLES_DIR    = examples
 BUILD_DIR       = build
+LIB_DIR         = lib
 TEST_SRC_CORE   = tests/test_cbox_core.c
 TEST_BIN_CORE   = build/test_cbox_core
 TEST_CBOX_SRC   = tests/test_cbox.c
@@ -18,7 +19,7 @@ TEST_DATE_SRC = tests/test_cbox_date.c
 TEST_DATE_BIN = build/test_cbox_date
 
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c99 -I$(INCLUDE_DIR) -g
+CFLAGS = -Wall -Wextra -std=c99 -fPIC -I$(INCLUDE_DIR) -g
 LDFLAGS =
 
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
@@ -27,10 +28,16 @@ OBJ_FILES = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC_FILES))
 EXAMPLE_FILES = $(wildcard $(EXAMPLES_DIR)/*.c)
 EXAMPLE_BINS  = $(patsubst $(EXAMPLES_DIR)/%.c,$(BUILD_DIR)/%,$(EXAMPLE_FILES))
 
-all: $(BUILD_DIR) libcbox.a examples
+all: $(BUILD_DIR) $(LIB_DIR) $(LIB_DIR)/libcbox.a $(LIB_DIR)/libcbox.so examples
 
-libcbox.a: $(OBJ_FILES)
+$(LIB_DIR):
+	mkdir -p $(LIB_DIR)
+
+$(LIB_DIR)/libcbox.a: $(OBJ_FILES)
 	ar rcs $@ $^
+
+$(LIB_DIR)/libcbox.so: $(OBJ_FILES)
+	$(CC) -shared -o $@ $^
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
@@ -47,8 +54,11 @@ test: all
 	done
 	@echo "All example runs succeeded."
 
-$(BUILD_DIR)/%: $(EXAMPLES_DIR)/%.c libcbox.a
-	$(CC) $(CFLAGS) $< libcbox.a -o $@
+$(BUILD_DIR)/%: $(EXAMPLES_DIR)/%.c $(LIB_DIR)/libcbox.a
+	$(CC) $(CFLAGS) $< $(LIB_DIR)/libcbox.a -o $@
+
+$(TEST_BIN_CORE): $(TEST_SRC_CORE) $(LIB_DIR)/libcbox.a
+	$(CC) $(CFLAGS) -Iinclude $(TEST_SRC_CORE) $(LIB_DIR)/libcbox.a -o $(TEST_BIN_CORE)
 
 test-core: $(TEST_BIN_CORE)
 	@echo "Running core unit tests..."
@@ -115,7 +125,8 @@ test:
 	@make test-container
 
 clean:
-	rm -rf $(BUILD_DIR) libcbox.a
+	rm -rf $(BUILD_DIR) $(LIB_DIR)
+
 
 .PHONY: all examples clean
 
