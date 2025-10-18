@@ -305,6 +305,34 @@ CBoxContainer[2]:
 == JSON summary: {"type":"CBoxContainer","count":2,"items":[{"type":"CBoxContainer","count":2,"items":[{"type":"Decimal","value":"1.11"},{"type":"Decimal","value":"2.22"}]},{"type":"CBoxContainer","count":2,"items":[{"type":"IntArray","length":3,"values":[100,200,300],"address":"0x55a16f98d480"},{"type":"Decimal","value":"3.33"}]}]}
 ```
 
+### [examples/cbox_csv_demo.c](examples/cbox_csv_demo.c)
+
+```bash
+$ make
+$ ./build/cbox_csv_demo 
+CBoxCSV: 4 rows × 5 columns
+Columns: Name, Age, Height, Member, JoinDate
+Row 0: string: "Alice" CBox<int>: 30
+ CBox<double>: 1.650000
+ string: "true" CBox<int>: 2021
+ 
+Row 1: string: "Bob" CBox<int>: 25
+ CBox<double>: 1.800000
+ string: "false" CBox<int>: 2022
+ 
+Row 2: string: "Charlie" CBox<int>: 40
+ CBox<double>: 1.750000
+ string: "true" CBox<int>: 2020
+ 
+Row 3: string: "Diana" CBox<int>: 35
+ CBox<double>: 1.600000
+ string: "false" CBox<int>: 2023
+ 
+JSON:
+{"type":"CBoxCSV","rows":[[{"type":"string","value":"Alice"},{"type":"int","value":30,"address":"0x561889b559d0"},{"type":"double","value":1.650000,"address":"0x561889b55a40"},{"type":"string","value":"true"},{"type":"int","value":2021,"address":"0x561889b55b20"}],[{"type":"string","value":"Bob"},{"type":"int","value":25,"address":"0x561889b55c50"},{"type":"double","value":1.800000,"address":"0x561889b55cc0"},{"type":"string","value":"false"},{"type":"int","value":2022,"address":"0x561889b55da0"}],[{"type":"string","value":"Charlie"},{"type":"int","value":40,"address":"0x561889b55ed0"},{"type":"double","value":1.750000,"address":"0x561889b55f40"},{"type":"string","value":"true"},{"type":"int","value":2020,"address":"0x561889b56020"}],[{"type":"string","value":"Diana"},{"type":"int","value":35,"address":"0x561889b56150"},{"type":"double","value":1.600000,"address":"0x561889b561c0"},{"type":"string","value":"false"},{"type":"int","value":2023,"address":"0x561889b562a0"}]]}
+```
+
+
 ## Unit tests run
 
 ```bash
