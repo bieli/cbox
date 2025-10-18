@@ -71,6 +71,7 @@ typedef enum {
     CBOX_INT,
     CBOX_FLOAT,
     CBOX_DOUBLE,
+    CBOX_DECIMAL,
     CBOX_STRUCT,
     CBOX_ARRAY
 } CBoxType;
@@ -130,6 +131,7 @@ Type      | Trait Name          | JSON Support
 int       | CBOX_INT_TRAIT      | Yes
 float     | CBOX_FLOAT_TRAIT    | Yes
 double    | CBOX_DOUBLE_TRAIT   | Yes
+decimal   | CBOX_DECIMAL_TRAIT  | Yes
 Person    | CBOX_PERSON_TRAIT   | Yes
 Product   | CBOX_PRODUCT_TRAIT  | Yes
 IntArray  | CBOX_INTARRAY_TRAIT | Yes
