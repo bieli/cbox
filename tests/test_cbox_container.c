@@ -81,6 +81,35 @@ int test_container_json() {
     return 0;
 }
 
+int test_nested_container_json_serialization() {
+    // Create inner container
+    CBoxContainer* inner = cbox_container_create(2);
+    Decimal d1 = {1, 2029924789};
+    Decimal d2 = {-2, 2129924785};
+    cbox_container_add(inner, CBOX_WRAP_DECIMAL(d1));
+    cbox_container_add(inner, CBOX_WRAP_DECIMAL(d2));
+    CBox* boxed_inner = CBOX_WRAP_CONTAINER(inner);
+
+    // Create outer container
+    CBoxContainer* outer = cbox_container_create(1);
+    cbox_container_add(outer, boxed_inner);
+    CBox* boxed_outer = CBOX_WRAP_CONTAINER(outer);
+
+    // Serialize to JSON
+    char json[2048];
+    cbox_to_json(boxed_outer, json, sizeof(json));
+
+    // Check for nested structure
+    if (!strstr(json, "\"type\":\"CBoxContainer\"")) return 1;
+    if (!strstr(json, "\"value\":\"1.2029924789\"")) return 2;
+    if (!strstr(json, "\"value\":\"-2.2129924785\"")) return 3;
+    if (!strstr(json, "\"items\"")) return 4;
+
+    printf("Nested container JSON:\n%s\n", json);
+    cbox_free(boxed_outer);
+    return 0;
+}
+
 int main() {
     int failed = 0;
 
@@ -95,6 +124,9 @@ int main() {
 
     printf("Running test_container_json...\n");
     failed += test_container_json();
+
+    printf("Running test_nested_container_json_serialization...\n");
+    failed += test_nested_container_json_serialization();
 
     PRINT_TEST_RESULT("container tests", "Container", failed);
     return failed;
