@@ -68,13 +68,16 @@ This builds the static library libcbox.a and compiles examples in examples/.
 ### CBoxType
 ```c
 typedef enum {
+    CBOX_BOOL,
     CBOX_INT,
     CBOX_FLOAT,
     CBOX_DOUBLE,
     CBOX_DECIMAL,
+    CBOX_DATE,
     CBOX_STRUCT,
     CBOX_ARRAY,
-    CBOX_CONTAINER
+    CBOX_CONTAINER,
+    CBOX_CSV
 } CBoxType;
 ```
 
@@ -129,14 +132,18 @@ CBOX_DEBUG_INFO_VERBOSE(box); // includes parent reference and JSON
 ```bash
 Type          | Trait Name           | JSON Support
 -------------------------------------------------------
+bool          | CBOX_BOOL_TRAIT      | Yes
 int           | CBOX_INT_TRAIT       | Yes
 float         | CBOX_FLOAT_TRAIT     | Yes
 double        | CBOX_DOUBLE_TRAIT    | Yes
 decimal       | CBOX_DECIMAL_TRAIT   | Yes
+data          | CBOX_DATE_TRAIT      | Yes
+struct        | CBOX_STRUCT_TRAIT    | Yes
 Person        | CBOX_PERSON_TRAIT    | Yes
 Product       | CBOX_PRODUCT_TRAIT   | Yes
 IntArray      | CBOX_INTARRAY_TRAIT  | Yes
 CBoxContainer | CBOX_CONTAINER_TRAIT | Yes
+CBoxCsv       | CBOX_CSV_TRAIT       | Yes
 ```
 
 You can define your own types and traits by implementing the four trait functions.
