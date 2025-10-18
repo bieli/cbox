@@ -288,6 +288,22 @@ SensorReading{id: sensor-A1, value: 78.90, time: 169765}
 [CBox JSON] {"type":"SensorReading","sensor_id":"sensor-A1","value":78.90,"timestamp":169765,"address":"0x5622d0d1a370"}
 ```
 
+### [examples/cbox_nested_container_demo.c](examples/cbox_nested_container_demo.c)
+
+```bash
+$ make
+$ ./build/cbox_nested_container_demo
+== Nested container structure:
+CBoxContainer[2]:
+  [0] CBoxContainer[2]:
+  [0] CBox<decimal>: 1.11
+  [1] CBox<decimal>: 2.22
+  [1] CBoxContainer[2]:
+  [0] IntArray[3]: 100 200 300 
+  [1] CBox<decimal>: 3.33
+== JSON summary: {"type":"CBoxContainer","count":2}
+```
+
 ## Unit tests run
 
 ```bash
