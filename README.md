@@ -310,22 +310,38 @@ CBoxContainer[2]:
 ```bash
 $ make
 $ ./build/cbox_csv_demo 
-CBoxCSV: 4 rows × 5 columns
+CBoxCSV: 4 rows x 5 columns
 Columns: Name, Age, Height, Member, JoinDate
-Row 0: string: "Alice" CBox<int>: 30
- CBox<double>: 1.650000
- bool: true date: 2021-06-15 
-Row 1: string: "Bob" CBox<int>: 25
- CBox<double>: 1.800000
- bool: false date: 2022-01-10 
-Row 2: string: "Charlie" CBox<int>: 40
- CBox<double>: 1.750000
- bool: true date: 2020-09-05 
-Row 3: string: "Diana" CBox<int>: 35
- CBox<double>: 1.600000
- bool: false date: 2023-03-22 
+Row 0: 
+ Col 0: CBox<string>: "Alice"
+ Col 1: CBox<int>: 30
+ Col 2: CBox<double>: 1.650000
+ Col 3: CBox<bool>: true
+ Col 4: CBox<date>: 2021-06-15
+
+Row 1: 
+ Col 0: CBox<string>: "Bob"
+ Col 1: CBox<int>: 25
+ Col 2: CBox<double>: 1.800000
+ Col 3: CBox<bool>: false
+ Col 4: CBox<date>: 2022-01-10
+
+Row 2: 
+ Col 0: CBox<string>: "Charlie"
+ Col 1: CBox<int>: 40
+ Col 2: CBox<double>: 1.750000
+ Col 3: CBox<bool>: true
+ Col 4: CBox<date>: 2020-09-05
+
+Row 3: 
+ Col 0: CBox<string>: "Diana"
+ Col 1: CBox<int>: 35
+ Col 2: CBox<double>: 1.600000
+ Col 3: CBox<bool>: false
+ Col 4: CBox<date>: 2023-03-22
+
 JSON:
-{"type":"CBoxCSV","rows":[[{"type":"string","value":"Alice"},{"type":"int","value":30,"address":"0x55cccba469d0"},{"type":"double","value":1.650000,"address":"0x55cccba46a40"},{"type":"bool","value":true},{"type":"date","value":"2021-06-15"}],[{"type":"string","value":"Bob"},{"type":"int","value":25,"address":"0x55cccba46c50"},{"type":"double","value":1.800000,"address":"0x55cccba46cc0"},{"type":"bool","value":false},{"type":"date","value":"2022-01-10"}],[{"type":"string","value":"Charlie"},{"type":"int","value":40,"address":"0x55cccba46ed0"},{"type":"double","value":1.750000,"address":"0x55cccba46f40"},{"type":"bool","value":true},{"type":"date","value":"2020-09-05"}],[{"type":"string","value":"Diana"},{"type":"int","value":35,"address":"0x55cccba47150"},{"type":"double","value":1.600000,"address":"0x55cccba471c0"},{"type":"bool","value":false},{"type":"date","value":"2023-03-22"}]]}
+{"type":"CBoxCSV","rows":[[{"type":"string","value":"Alice"},{"type":"int","value":30,"address":"0x559c1dc229d0"},{"type":"double","value":1.650000,"address":"0x559c1dc22a40"},{"type":"bool","value":true},{"type":"date","value":"2021-06-15"}],[{"type":"string","value":"Bob"},{"type":"int","value":25,"address":"0x559c1dc22c50"},{"type":"double","value":1.800000,"address":"0x559c1dc22cc0"},{"type":"bool","value":false},{"type":"date","value":"2022-01-10"}],[{"type":"string","value":"Charlie"},{"type":"int","value":40,"address":"0x559c1dc22ed0"},{"type":"double","value":1.750000,"address":"0x559c1dc22f40"},{"type":"bool","value":true},{"type":"date","value":"2020-09-05"}],[{"type":"string","value":"Diana"},{"type":"int","value":35,"address":"0x559c1dc23150"},{"type":"double","value":1.600000,"address":"0x559c1dc231c0"},{"type":"bool","value":false},{"type":"date","value":"2023-03-22"}]]}
 ```
 
 

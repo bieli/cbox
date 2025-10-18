@@ -25,7 +25,7 @@ void int_destroy(void* data) {
 }
 
 void int_print(const void* data) {
-    printf("CBox<int>: %d\n", *(int*)data);
+    printf("CBox<int>: %d", *(int*)data);
 }
 
 void* float_clone(const void* data) {
@@ -53,7 +53,7 @@ void double_destroy(void* data) {
 }
 
 void double_print(const void* data) {
-    printf("CBox<double>: %lf\n", *(double*)data);
+    printf("CBox<double>: %lf", *(double*)data);
 }
 
 CBox* cbox_new_with_trait(void* value, size_t size, CBoxType type, CBoxTrait* trait) {
@@ -88,7 +88,6 @@ CBox* cbox_clone(const CBox* original) {
 
     return clone;
 }
-
 
 void cbox_print(const CBox* box) {
     if (!box || !box->trait || !box->trait->print) {
@@ -138,7 +137,7 @@ void basic_destroy(void* data) {
 }
 
 void basic_print_string(const void* data) {
-    printf("string: \"%s\"", (char*)data);
+    printf("CBox<string>: \"%s\"", (char*)data);
 }
 
 void basic_json_string(const void* data, char* out, size_t size) {

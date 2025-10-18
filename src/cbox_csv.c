@@ -127,7 +127,7 @@ void csv_print(const void* data) {
     const CBoxCSV* csv = (const CBoxCSV*)data;
     if (!csv) return;
 
-    printf("CBoxCSV: %zu rows × %zu columns\n", csv->row_count, csv->column_count);
+    printf("CBoxCSV: %zu rows x %zu columns\n", csv->row_count, csv->column_count);
 
     if (csv->column_names) {
         printf("Columns: ");
@@ -142,14 +142,43 @@ void csv_print(const void* data) {
     for (size_t r = 0; r < csv->row_count; ++r) {
         CBoxContainer* row = csv->rows[r];
         if (!row) continue;
-        printf("Row %zu: ", r);
+        printf("Row %zu: \n", r);
         for (size_t c = 0; c < row->count; ++c) {
             if (row->items[c]) {
+                printf(" Col %zu: ", c);
                 cbox_print(row->items[c]);
-                printf(" ");
+                printf("\n");
             }
         }
         printf("\n");
+    }
+}
+
+void csv_print_with_headers(const void* data) {
+    const CBoxCSV* csv = (const CBoxCSV*)data;
+    if (!csv || !csv->rows || !csv->column_names) return;
+
+    printf("CBoxCSV: %zu rows x %zu columns\n", csv->row_count, csv->column_count);
+    printf("Columns: ");
+    for (size_t i = 0; i < csv->column_count; ++i) {
+        printf("%s%s", i > 0 ? ", " : "", csv->column_names[i]);
+    }
+    printf("\n");
+
+    for (size_t r = 0; r < csv->row_count; ++r) {
+        CBoxContainer* row = csv->rows[r];
+        if (!row || row->count != csv->column_count) continue;
+
+        printf("Row %zu:\n", r);
+        for (size_t c = 0; c < csv->column_count; ++c) {
+            printf("  %s: ", csv->column_names[c]);
+            if (row->items[c]) {
+                cbox_print(row->items[c]);
+            } else {
+                printf("[null]");
+            }
+            printf("\n");
+        }
     }
 }
 

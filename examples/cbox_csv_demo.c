@@ -9,6 +9,7 @@ int main() {
 
     CBox* box = CBOX_WRAP_CSV(csv);
     cbox_print(box);
+    // csv_print_with_headers(box);
 
     char json[4096];
     cbox_to_json(box, json, sizeof(json));

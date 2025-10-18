@@ -22,7 +22,7 @@ void bool_destroy(void* data) {
 }
 
 void bool_print(const void* data) {
-    printf("bool: %s", *(bool*)data ? "true" : "false");
+    printf("CBox<bool>: %s", *(bool*)data ? "true" : "false");
 }
 
 void bool_serialize_json(const void* data, char* out, size_t size) {

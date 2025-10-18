@@ -28,7 +28,7 @@ void date_destroy(void* data) {
 
 void date_print(const void* data) {
     const CBoxDate* date = (const CBoxDate*)data;
-    printf("date: %04d-%02d-%02d", date->year, date->month, date->day);
+    printf("CBox<date>: %04d-%02d-%02d", date->year, date->month, date->day);
 }
 
 void date_serialize_json(const void* data, char* out, size_t size) {
